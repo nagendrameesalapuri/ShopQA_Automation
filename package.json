@@ -1,0 +1,36 @@
+{
+  "name": "shopqa_automation",
+  "version": "1.0.0",
+  "description": "Playwright-based QA automation framework for ShopQA platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "playwright",
+    "qa-automation",
+    "testing",
+    "e2e"
+  ],
+  "author": "QA Automation Team",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "dotenv": "^16.3.1"
+  }
+}
