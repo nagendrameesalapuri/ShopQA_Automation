@@ -27,9 +27,9 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   use: {
-    baseURL: process.env.BASE_URL || "https://nagendra-shopqa.netlify.app",
+    baseURL: process.env.BASE_URL || "https://nagendra-shopqa.netlify.app/",
 
-    headless: process.env.HEADLESS !== "false",
+    headless: process.env.HEADLESS ? process.env.HEADLESS === "true" : false,
 
     screenshot: "only-on-failure",
 
@@ -48,27 +48,20 @@ module.exports = defineConfig({
         ...devices["Desktop Chrome"],
       },
     },
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-      },
-    },
-    {
-      name: "webkit",
-      use: {
-        ...devices["Desktop Safari"],
-      },
-    },
+    // {
+    //   name: "firefox",
+    //   use: {
+    //     ...devices["Desktop Firefox"],
+    //   },
+    // },
+    // {
+    //   name: "webkit",
+    //   use: {
+    //     ...devices["Desktop Safari"],
+    //   },
+    // },
   ],
 
-  // Web server configuration (if needed for local development)
-  webServer: process.env.CI
-    ? undefined
-    : {
-        command: "npm run dev",
-        url: process.env.BASE_URL || "https://nagendra-shopqa.netlify.app",
-        reuseExistingServer: true,
-        timeout: 120 * 1000,
-      },
+  // No local web server is required for this project because the app is already hosted.
+  webServer: undefined,
 });
