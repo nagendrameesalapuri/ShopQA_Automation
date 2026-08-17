@@ -29,7 +29,7 @@ module.exports = defineConfig({
   use: {
     baseURL: process.env.BASE_URL || "https://nagendra-shopqa.netlify.app/",
 
-    headless: process.env.HEADLESS ? process.env.HEADLESS === "true" : false,
+    headless: process.env.HEADLESS ? process.env.HEADLESS === "false" : true,
 
     screenshot: "only-on-failure",
 
