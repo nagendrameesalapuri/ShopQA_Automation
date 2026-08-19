@@ -33,10 +33,7 @@ module.exports = defineConfig({
   use: {
     baseURL: getBaseURL(),
 
-    headless:
-      process.env.HEADLESS !== undefined
-        ? process.env.HEADLESS === "true"
-        : Boolean(process.env.CI),
+    headless: process.env.HEADLESS ? process.env.HEADLESS === "false" : true,
 
     screenshot: "only-on-failure",
 
