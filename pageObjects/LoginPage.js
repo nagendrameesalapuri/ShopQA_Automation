@@ -1,35 +1,35 @@
 const { BasePage } = require("./BasePage");
 const { TIMEOUTS } = require("../constants/timeouts");
+const { SELECTORS } = require("../constants/selectors");
+const { ROUTES } = require("../constants/routes");
 const logger = require("../utils/logger");
 
 class LoginPage extends BasePage {
   constructor(page) {
     super(page);
-    this.emailInput = page.getByTestId("input-email");
-    this.loginForm = page.locator("[data-testid='login-form']");
-    this.passwordInput = page.getByTestId("input-password");
-    this.signInButton = page.getByRole("button", { name: "Sign In" });
-    this.rememberMeCheckbox = page.locator("input[type='checkbox']");
-    this.togglePassword = page.locator("[data-testid='toggle-password']");
-    this.emailError = page.getByTestId("email-error");
-    this.passwordError = page.getByTestId("password-error");
-    this.loginError = page.getByTestId("login-error");
-    this.userMenu = page.getByTestId("user-menu-btn");
-    this.adminMenu = page.getByTestId("admin-dashboard");
-    this.sessionExpiredMsg = page.getByTestId("session-expired-msg");
-    this.forgotPasswordLink = page.getByRole("link", {
-      name: "Forgot Password?",
-    });
+    this.emailInput = page.locator(SELECTORS.EMAIL_INPUT);
+    this.loginForm = page.locator(SELECTORS.LOGIN_FORM);
+    this.passwordInput = page.locator(SELECTORS.PASSWORD_INPUT);
+    this.signInButton = page.locator(SELECTORS.SIGN_IN_BUTTON);
+    this.rememberMeCheckbox = page.locator(SELECTORS.REMEMBER_ME_CHECKBOX);
+    this.togglePassword = page.locator(SELECTORS.TOGGLE_PASSWORD);
+    this.emailError = page.locator(SELECTORS.EMAIL_ERROR);
+    this.passwordError = page.locator(SELECTORS.PASSWORD_ERROR);
+    this.loginError = page.locator(SELECTORS.LOGIN_ERROR);
+    this.userMenu = page.locator(SELECTORS.USER_MENU);
+    this.adminMenu = page.locator(SELECTORS.ADMIN_DASHBOARD);
+    this.sessionExpiredMsg = page.locator(SELECTORS.SESSION_EXPIRED_MSG);
+    this.forgotPasswordLink = page.locator(SELECTORS.FORGOT_PASSWORD_LINK);
   }
 
   async navigate() {
     logger.info("Navigating to login page");
-    await this.page.goto("/login");
+    await this.page.goto(ROUTES.LOGIN);
   }
 
   async navigateToExpiredSession() {
     logger.info("Navigating to login page with expired session");
-    await this.page.goto("/login?expired=true");
+    await this.page.goto(ROUTES.EXPIRED_SESSION);
   }
 
   async verifyLoginFormVisible() {

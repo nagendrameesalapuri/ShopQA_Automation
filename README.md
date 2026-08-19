@@ -4,7 +4,7 @@ A robust Playwright-based test automation framework for the ShopQA e-commerce pl
 
 ## 📋 Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - npm or yarn
 - Git
 
@@ -55,6 +55,8 @@ ShopQA_Automation/
 ├── pageObjects/          # Page Object Model classes
 │   ├── BasePage.js       # Base class with common methods
 │   ├── LoginPage.js      # Login page object
+│   ├── ProductsPage.js   # Product catalog page object
+│   ├── RegistrationPage.js # Registration page object
 │   └── POManager.js      # Page object manager
 ├── tests/                # Test specifications
 │   └── Login.spec.js     # Login tests
@@ -65,9 +67,9 @@ ShopQA_Automation/
 │   ├── logger.js         # Logging utility
 │   └── assertions.js     # Custom assertions
 ├── constants/            # Constants and configuration
-│   └── selectors.js      # CSS selectors
-├── fixtures/             # Test fixtures
-│   └── auth.fixture.js   # Authentication fixtures
+│   ├── routes.js          # Application routes
+│   ├── selectors.js       # CSS selectors
+│   └── timeouts.js        # Timeout values
 ├── docs/                 # Documentation
 │   ├── ASSERTION_STRATEGY.md    # Assertion usage guide
 │   └── CONSOLIDATION_SUMMARY.md # Refactoring summary
@@ -83,6 +85,7 @@ For detailed guidance on using the framework:
 
 - **[Assertion Strategy Guide](./docs/ASSERTION_STRATEGY.md)** - When and how to use BasePage vs CustomAssertions
 - **[Consolidation Summary](./docs/CONSOLIDATION_SUMMARY.md)** - Overview of assertion refactoring
+- **[Timeout Usage Analysis](./docs/TIMEOUTS_USAGE_ANALYSIS.md)** - Centralized timeout guidance
 
 ## 🏗️ Architecture
 
@@ -110,6 +113,7 @@ Tests are tagged with metadata for better organization:
 - `@smoke`: Critical path tests (quick validation)
 - `@regression`: Full regression test suite
 - `@login`: Login-related tests
+- `@registration`: Registration-related tests
 
 ## 📊 Reporting
 
@@ -176,12 +180,6 @@ test("@smoke @login should login successfully", async ({ page }) => {
   await loginPage.loginAs("user@test.com", "password");
   await loginPage.verifyCustomerLoggedIn();
 });
-
-// Using authenticated fixture
-test("@regression should logout successfully", async ({ authenticatedPage }) => {
-  // Page is already authenticated
-  await authenticatedPage.click("[data-testid='logout-btn']");
-});
 ```
 
 ## 🐛 Debugging
@@ -209,7 +207,7 @@ Traces are captured on first retry and saved in `test-results/`
 
 - Never commit `.env` file (add to `.gitignore`)
 - Use environment variables for sensitive data
-- Store credentials in GitHub Secrets for CI/CD
+- Store credentials in GitHub Secrets for CI/CD (`USERNAME_CUSTOMER`, `PASSWORD_CUSTOMER`, `USERNAME_ADMIN`, `PASSWORD_ADMIN`)
 - Rotate test credentials regularly
 
 ## 📚 Resources

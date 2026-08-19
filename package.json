@@ -26,6 +26,9 @@
   ],
   "author": "QA Automation Team",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",

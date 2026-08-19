@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
 const { POManager } = require("../pageObjects/POManager");
 const logger = require("../utils/logger");
-const { registerData } = require("../testData/registerData");
+const { createValidUser, registerData } = require("../testData/registerData");
 
 test.describe("Registration Tests", () => {
   let registrationPage;
@@ -18,17 +18,15 @@ test.describe("Registration Tests", () => {
     await logger.testPass("should display registration form with all elements");
   });
 
-  test("@regression @registration should show validation errors for empty form", async ({
-    page,
-  }) => {
-    await logger.testStart("should show validation errors for empty form");
-    await registrationPage.clickOnCreateAccount();
+  test("@regression @registration should show validation errors for empty form", async () => {
+    logger.testStart("should show validation errors for empty form");
+    await registrationPage.clickCreateAccount();
     await registrationPage.verifyEmptyFormValidation();
-    await logger.testPass("should show validation errors for empty registration form");
+    logger.testPass("should show validation errors for empty registration form");
   });
 
-  test("@regression @registration should show error for invalid email format", async ({ page }) => {
-    await logger.testStart("should show error for invalid email format");
+  test("@regression @registration should show error for invalid email format", async () => {
+    logger.testStart("should show error for invalid email format");
     await registrationPage.signupWith(
       registerData.invalidEmail.firstName,
       registerData.invalidEmail.lastName,
@@ -38,11 +36,11 @@ test.describe("Registration Tests", () => {
       registerData.invalidEmail.phone,
     );
     await registrationPage.verifyInvalidEmailError();
-    await logger.testPass("should show error for invalid email format for registration page");
+    logger.testPass("should show error for invalid email format for registration page");
   });
 
-  test("@regression @registration should show validation for weak password", async ({ page }) => {
-    await logger.testStart("should show validation for weak password");
+  test("@regression @registration should show validation for weak password", async () => {
+    logger.testStart("should show validation for weak password");
     await registrationPage.signupWith(
       registerData.shortPassword.firstName,
       registerData.shortPassword.lastName,
@@ -52,11 +50,11 @@ test.describe("Registration Tests", () => {
       registerData.shortPassword.phone,
     );
     await registrationPage.verifyWeakPassword();
-    await logger.testPass("should show validation for weak password");
+    logger.testPass("should show validation for weak password");
   });
 
   test("@regression @registration should fail if passwords do not match", async () => {
-    await logger.testStart("should fail if passwords do not match");
+    logger.testStart("should fail if passwords do not match");
     await registrationPage.signupWith(
       registerData.passwordMismatch.firstName,
       registerData.passwordMismatch.lastName,
@@ -66,20 +64,21 @@ test.describe("Registration Tests", () => {
       registerData.passwordMismatch.phone,
     );
     await registrationPage.verifyPasswordMismatchError();
-    await logger.testPass("should fail if passwords do not match");
+    logger.testPass("should fail if passwords do not match");
   });
 
-  test("@regression @registration should successfully registered as customer", async () => {
-    await logger.testStart("should successfully registered as customer");
+  test("@regression @registration should successfully register a customer", async () => {
+    logger.testStart("should successfully register a customer");
+    const validUser = createValidUser();
     await registrationPage.signupWith(
-      registerData.validUser.firstName,
-      registerData.validUser.lastName,
-      registerData.validUser.email,
-      registerData.validUser.password,
-      registerData.validUser.confirmPassword,
-      registerData.validUser.phone,
+      validUser.firstName,
+      validUser.lastName,
+      validUser.email,
+      validUser.password,
+      validUser.confirmPassword,
+      validUser.phone,
     );
-    await registrationPage.verifyCustomerRegistered();
-    await logger.testPass("should successfully registered as customer");
+    await registrationPage.verifyRegistrationSuccess();
+    logger.testPass("should successfully register a customer");
   });
 });
