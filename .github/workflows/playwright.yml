@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
           cache: "npm"
 
       - name: Install dependencies
@@ -32,11 +32,19 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps ${{ matrix.browser }}
 
+      - name: Check test environment
+        run: curl --fail --silent --show-error --head https://nagendra-shopqa.netlify.app
+
       - name: Run tests (${{ matrix.browser }})
         run: npx playwright test --project=${{ matrix.browser }}
         env:
           ENV: dev
           CI: true
+          HEADLESS: true
+          USERNAME_CUSTOMER: ${{ secrets.USERNAME_CUSTOMER }}
+          PASSWORD_CUSTOMER: ${{ secrets.PASSWORD_CUSTOMER }}
+          USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+          PASSWORD_ADMIN: ${{ secrets.PASSWORD_ADMIN }}
 
       - name: Upload test results
         if: always()
@@ -52,6 +60,15 @@ jobs:
         with:
           name: test-results-${{ matrix.browser }}
           path: test-results/
+          retention-days: 30
+
+      - name: Upload automation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-logs-${{ matrix.browser }}
+          path: logs/
+          if-no-files-found: ignore
           retention-days: 30
 
   lint:

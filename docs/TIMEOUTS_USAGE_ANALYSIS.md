@@ -1,8 +1,8 @@
-# TIMEOUTS Usage Analysis
+# Timeout Usage Guide
 
-## Current Usage Status
+Timeout values are centralized in `constants/timeouts.js` and should be reused instead of adding numeric literals to page objects or configuration.
 
-### ✅ Currently Being Used
+## Current Usage
 
 **File: `pageObjects/LoginPage.js`**
 
@@ -210,7 +210,7 @@ module.exports = defineConfig({
 
 ## Current TIMEOUTS Defined
 
-```javascript
+````javascript
 TIMEOUTS = {
   SHORT: 3000, // Quick operations
   DEFAULT: 5000, // Standard wait
@@ -224,14 +224,22 @@ TIMEOUTS = {
   FILE_DOWNLOAD: 30000, // Specific: File operations
 
   ANIMATION: 500, // Specific: CSS animations
-  TRANSITION: 1000, // Specific: CSS transitions
-};
-```
+  The configuration and page objects currently use the shared values as follows:
 
----
+  - `playwright.config.js` uses `TIMEOUTS.EXTRA_LONG`, `TIMEOUTS.DEFAULT`, and `TIMEOUTS.MEDIUM`.
+  - `BasePage.js` uses `TIMEOUTS.DEFAULT` for element waits.
+  - `LoginPage.js` uses `TIMEOUTS.LONG` and `TIMEOUTS.EXTRA_LONG` for authentication waits.
 
-## Conclusion
+  ## Adding A Timeout
 
-✅ **TIMEOUTS file EXISTS and IS BEING USED** (in LoginPage.js)
-🔄 **Could be expanded** to BasePage.js and playwright.config.js
-⭐ **Recommended:** Gradually use throughout project for consistency
+  1. Choose an existing value from `constants/timeouts.js`.
+  2. Use the named constant at the call site.
+  3. Add a new named value only when the operation has a distinct timeout requirement.
+
+  Example:
+
+  ```js
+  const { TIMEOUTS } = require("../constants/timeouts");
+
+  await this.waitForElement(this.userMenu, TIMEOUTS.LONG);
+````

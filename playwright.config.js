@@ -1,8 +1,12 @@
 const { defineConfig, devices } = require("@playwright/test");
 require("dotenv").config();
+const { getBaseURL } = require("./testData/env.config");
+const { TIMEOUTS } = require("./constants/timeouts");
 
 module.exports = defineConfig({
   testDir: "./tests",
+  forbidOnly: Boolean(process.env.CI),
+  failOnFlakyTests: Boolean(process.env.CI),
 
   // Multi-reporter setup for comprehensive reporting
   reporter: [
@@ -13,10 +17,10 @@ module.exports = defineConfig({
   ],
 
   // Global timeout settings
-  timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 30 * 1000,
+  timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : TIMEOUTS.EXTRA_LONG,
 
   expect: {
-    timeout: process.env.EXPECT_TIMEOUT ? parseInt(process.env.EXPECT_TIMEOUT) : 5000,
+    timeout: process.env.EXPECT_TIMEOUT ? parseInt(process.env.EXPECT_TIMEOUT) : TIMEOUTS.DEFAULT,
   },
 
   // Parallelization configuration
@@ -27,9 +31,12 @@ module.exports = defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   use: {
-    baseURL: process.env.BASE_URL || "https://nagendra-shopqa.netlify.app/",
+    baseURL: getBaseURL(),
 
-    headless: process.env.HEADLESS ? process.env.HEADLESS === "true" : false,
+    headless:
+      process.env.HEADLESS !== undefined
+        ? process.env.HEADLESS === "true"
+        : Boolean(process.env.CI),
 
     screenshot: "only-on-failure",
 
@@ -37,7 +44,7 @@ module.exports = defineConfig({
 
     video: "retain-on-failure",
 
-    actionTimeout: 10000,
+    actionTimeout: TIMEOUTS.MEDIUM,
   },
 
   // Multiple browser projects for cross-browser testing
@@ -48,18 +55,18 @@ module.exports = defineConfig({
         ...devices["Desktop Chrome"],
       },
     },
-    // {
-    //   name: "firefox",
-    //   use: {
-    //     ...devices["Desktop Firefox"],
-    //   },
-    // },
-    // {
-    //   name: "webkit",
-    //   use: {
-    //     ...devices["Desktop Safari"],
-    //   },
-    // },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+      },
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+      },
+    },
   ],
 
   // No local web server is required for this project because the app is already hosted.

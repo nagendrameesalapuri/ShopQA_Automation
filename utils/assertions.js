@@ -23,8 +23,7 @@ class CustomAssertions {
    * await CustomAssertions.expectElementCount(page.locator("tr"), 5);
    */
   static async expectElementCount(locator, expectedCount) {
-    const elements = await locator.all();
-    expect(elements).toHaveLength(expectedCount);
+    await expect(locator).toHaveCount(expectedCount);
   }
 
   /**
@@ -38,8 +37,7 @@ class CustomAssertions {
    * await CustomAssertions.expectElementHasClass(loginBtn, "active");
    */
   static async expectElementHasClass(element, className) {
-    const classes = await element.getAttribute("class");
-    expect(classes).toContain(className);
+    await expect(element).toHaveClass(new RegExp(`(?:^|\\s)${className}(?:\\s|$)`));
   }
 
   /**
@@ -53,8 +51,7 @@ class CustomAssertions {
    * await CustomAssertions.expectElementNotHasClass(loginBtn, "disabled");
    */
   static async expectElementNotHasClass(element, className) {
-    const classes = await element.getAttribute("class");
-    expect(classes).not.toContain(className);
+    await expect(element).not.toHaveClass(new RegExp(`(?:^|\\s)${className}(?:\\s|$)`));
   }
 
   /**

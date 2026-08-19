@@ -20,6 +20,12 @@ const config = {
 
 const environment = process.env.ENV || "dev";
 
+if (!config[environment]) {
+  throw new Error(
+    `Unsupported ENV value: "${environment}". Expected one of: ${Object.keys(config).join(", ")}.`,
+  );
+}
+
 module.exports = {
   env: environment,
   config: config[environment],

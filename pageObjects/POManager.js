@@ -1,19 +1,25 @@
 const { LoginPage } = require("../pageObjects/LoginPage");
 const { RegistrationPage } = require("../pageObjects/RegistrationPage");
+const { ProductsPage } = require("../pageObjects/ProductsPage");
 
 class POManager {
   constructor(page) {
     this.page = page;
-    this.LoginPage = new LoginPage(page);
-    this.RegistrationPage = new RegistrationPage(page);
+    this.loginPage = new LoginPage(page);
+    this.registrationPage = new RegistrationPage(page);
+    this.productsPage = new ProductsPage(page);
   }
 
   getLoginPage() {
-    return this.LoginPage;
+    return this.loginPage;
   }
 
   getRegistrationPage() {
-    return this.RegistrationPage;
+    return this.registrationPage;
+  }
+
+  getProductsPage() {
+    return this.productsPage;
   }
 }
 

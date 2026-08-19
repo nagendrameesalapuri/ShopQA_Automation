@@ -1,4 +1,5 @@
 const { expect } = require("@playwright/test");
+const { TIMEOUTS } = require("../constants/timeouts");
 
 class BasePage {
   constructor(page) {
@@ -25,11 +26,11 @@ class BasePage {
 
   // ==================== Wait Methods ====================
 
-  async waitForElement(locator, timeout = 5000) {
+  async waitForElement(locator, timeout = TIMEOUTS.DEFAULT) {
     await locator.waitFor({ state: "visible", timeout });
   }
 
-  async waitForElementHidden(locator, timeout = 5000) {
+  async waitForElementHidden(locator, timeout = TIMEOUTS.DEFAULT) {
     await locator.waitFor({ state: "hidden", timeout });
   }
 
@@ -109,8 +110,16 @@ class BasePage {
     await expect(locator).toContainText(text);
   }
 
+  async expectNotContainsText(locator, text) {
+    await expect(locator).not.toContainText(text);
+  }
+
   async expectHasText(locator, text) {
     await expect(locator).toHaveText(text);
+  }
+
+  async expectHasValue(locator, value) {
+    await expect(locator).toHaveValue(value);
   }
 
   async expectHasAttribute(locator, attribute, value) {

@@ -1,5 +1,19 @@
 require("dotenv").config();
 
+const requiredCiCredentials = [
+  "USERNAME_CUSTOMER",
+  "PASSWORD_CUSTOMER",
+  "USERNAME_ADMIN",
+  "PASSWORD_ADMIN",
+];
+
+if (process.env.CI) {
+  const missingCredentials = requiredCiCredentials.filter((name) => !process.env[name]);
+  if (missingCredentials.length > 0) {
+    throw new Error(`Missing required CI credentials: ${missingCredentials.join(", ")}`);
+  }
+}
+
 const loginData = {
   customer: {
     email: process.env.USERNAME_CUSTOMER || "john@test.com",

@@ -17,6 +17,30 @@ const SELECTORS = {
   USER_MENU: "[data-testid='user-menu-btn']",
   ADMIN_DASHBOARD: "[data-testid='admin-dashboard']",
   SESSION_EXPIRED_MSG: "[data-testid='session-expired-msg']",
+
+  // Registration Form
+  REQUIRED_ERROR: ".form-error",
+  REGISTRATION_FORM: "[data-testid='register-form']",
+  REGISTRATION_FIRST_NAME_INPUT: "[data-testid='input-reg-first-name']",
+  REGISTRATION_LAST_NAME_INPUT: "[data-testid='input-reg-last-name']",
+  REGISTRATION_EMAIL_INPUT: "[data-testid='input-reg-email']",
+  REGISTRATION_PASSWORD_INPUT: "[data-testid='input-reg-password']",
+  REGISTRATION_CONFIRM_PASSWORD_INPUT: "[data-testid='input-reg-confirm-password']",
+  REGISTRATION_PHONE_INPUT: "[data-testid='input-reg-phone']",
+  CREATE_ACCOUNT_BUTTON: "button:has-text('Create Account')",
+  SIGN_IN_LINK: "a:has-text('Sign in')",
+  PASSWORD_STRENGTH: "[data-testid='password-strength']",
+  CONFIRM_PASSWORD_ERROR: "[data-testid='confirm-password-error']",
+  REGISTRATION_SUCCESS_MESSAGE: "text=Registration successful! Please verify your email.",
+
+  // Product Catalog
+  PRODUCT_GRID: "[data-testid='product-grid']",
+  LIST_VIEW_BUTTON: "[data-testid='view-list']",
+  GRID_VIEW_BUTTON: "[data-testid='view-grid']",
+  PRODUCT_CARD: "[data-testid='product-card']",
+  PRODUCT_COUNT: "[data-testid='product-count']",
+  PRODUCTS_HEADING: "h1:has-text('All Products')",
+  SORT_DROPDOWN: "select",
 };
 
 module.exports = { SELECTORS };

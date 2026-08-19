@@ -1,13 +1,13 @@
-const registerData = {
-  validUser: {
-    firstName: "Nagendra",
-    lastName: "Meesala",
-    email: `john${Date.now()}@test.com`,
-    password: "Password123!",
-    confirmPassword: "Password123!",
-    phone: "9876543210",
-  },
+const createValidUser = () => ({
+  firstName: "Nagendra",
+  lastName: "Meesala",
+  email: `john${Date.now()}-${Math.random().toString(36).slice(2, 8)}@test.com`,
+  password: "Password123!",
+  confirmPassword: "Password123!",
+  phone: "9876543210",
+});
 
+const registerData = {
   invalidEmail: {
     firstName: "Nagendra",
     lastName: "Meesala",
@@ -36,4 +36,4 @@ const registerData = {
   },
 };
 
-module.exports = { registerData };
+module.exports = { createValidUser, registerData };
