@@ -21,6 +21,13 @@ const APP_TEXT = {
   PRODUCT_COUNT_LABEL: "products",
   LOADING_LABEL: "Loading",
   DEFAULT_SORTING: "newest",
+  ZERO: 0,
+  ONE: 1,
+  PRICE_ASC: "price_asc",
+  A_TO_Z: "name_asc",
+  NETWORKIDLE: "networkidle",
+  NO_PRODUCTS_FOUND: "No products found",
+  OUT_OF_STOCK: "Out of Stock",
 };
 
 const TEST_VALUES = {
