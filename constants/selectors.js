@@ -43,6 +43,21 @@ const SELECTORS = {
   PRODUCT_COUNT: "[data-testid='product-count']",
   PRODUCTS_HEADING: `h1:has-text('${APP_TEXT.PRODUCT_HEADING}')`,
   SORT_DROPDOWN: "select",
+  PRODUCT_CATEGORY_FILTER: (category) => `[data-testid='filter-cat-${category}']`,
+  PRODUCT_CATEGORY: "[data-testid='product-category']",
+  SORT_DROPDOWN: "[data-testid='sort-select']",
+  PRODUCT_PRICE: "[data-testid='product-price']",
+  PRODUCT_SEARCH_INPUT: "[data-testid='nav-search-input']",
+  PRODUCT_SEARCH_BUTTON: "[data-testid='nav-search-btn']",
+  EMPTY_STATE: '[data-testid="empty-state"]',
+  NEXT_PAGE: '[data-testid="next-page"]',
+  PRODUCT_NAME: '[data-testid="product-name"]',
+  INFINITE_SCROLL_TOGGLE: '[data-testid="infinite-scroll-toggle"]',
+  OUT_OF_STOCK_BADGE: '[data-testid="out-of-stock-badge"]',
+  PRODUCT_DETAIL_NAME: '[data-testid="product-detail-name"]',
+  PRODUCT_DETAIL_PRICE: '[data-testid="product-detail-price"]',
+  PRODUCT_DETAIL_STOCK: '[data-testid="product-detail-stock"]',
+  PRODUCT_DETAIL_RATING: '[data-testid="star-rating"]',
 };
 
 module.exports = { SELECTORS };
