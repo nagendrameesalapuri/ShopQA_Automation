@@ -2,6 +2,7 @@ const { BasePage } = require("./BasePage");
 const { CustomAssertions } = require("../utils/assertions");
 const { SELECTORS } = require("../constants/selectors");
 const { ROUTES } = require("../constants/routes");
+const { APP_TEXT } = require("../constants/constants");
 
 class RegistrationPage extends BasePage {
   constructor(page) {
@@ -59,11 +60,11 @@ class RegistrationPage extends BasePage {
   }
 
   async verifyInvalidEmailError() {
-    await this.expectContainsText(this.requiredError, "Invalid email");
+    await this.expectContainsText(this.requiredError, APP_TEXT.INVALID_EMAIL_MESSAGE);
   }
 
   async verifyWeakPassword() {
-    await this.expectContainsText(this.passwordStrength, "Very Weak");
+    await this.expectContainsText(this.passwordStrength, APP_TEXT.WEAK_PASSWORD_MESSAGE);
   }
 
   async verifyPasswordMismatchError() {
