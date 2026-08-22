@@ -1,5 +1,6 @@
 const { test } = require("@playwright/test");
 const { POManager } = require("../pageObjects/POManager");
+const { APP_TEXT } = require("../constants/constants");
 
 test.describe("Product Catalog", () => {
   let productsPage;
@@ -20,7 +21,7 @@ test.describe("Product Catalog", () => {
   });
 
   test("@smoke should verify default sorting", async () => {
-    await productsPage.verifyDefaultSorting("newest");
+    await productsPage.verifyDefaultSorting(APP_TEXT.DEFAULT_SORTING);
   });
 
   test("@smoke should verify grid and list views", async () => {

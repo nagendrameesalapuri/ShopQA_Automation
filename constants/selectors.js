@@ -1,9 +1,11 @@
+const { APP_TEXT } = require("./constants");
+
 const SELECTORS = {
   // Login Form
   LOGIN_FORM: "[data-testid='login-form']",
   EMAIL_INPUT: "[data-testid='input-email']",
   PASSWORD_INPUT: "[data-testid='input-password']",
-  SIGN_IN_BUTTON: "button:has-text('Sign In')",
+  SIGN_IN_BUTTON: `button:has-text('${APP_TEXT.SIGN_IN_LABEL}')`,
   REMEMBER_ME_CHECKBOX: "input[type='checkbox']",
   TOGGLE_PASSWORD: "[data-testid='toggle-password']",
   FORGOT_PASSWORD_LINK: "a:has-text('Forgot Password?')",
@@ -27,11 +29,11 @@ const SELECTORS = {
   REGISTRATION_PASSWORD_INPUT: "[data-testid='input-reg-password']",
   REGISTRATION_CONFIRM_PASSWORD_INPUT: "[data-testid='input-reg-confirm-password']",
   REGISTRATION_PHONE_INPUT: "[data-testid='input-reg-phone']",
-  CREATE_ACCOUNT_BUTTON: "button:has-text('Create Account')",
+  CREATE_ACCOUNT_BUTTON: `button:has-text('${APP_TEXT.CREATE_ACCOUNT_BUTTON}')`,
   SIGN_IN_LINK: "a:has-text('Sign in')",
   PASSWORD_STRENGTH: "[data-testid='password-strength']",
   CONFIRM_PASSWORD_ERROR: "[data-testid='confirm-password-error']",
-  REGISTRATION_SUCCESS_MESSAGE: "text=Registration successful! Please verify your email.",
+  REGISTRATION_SUCCESS_MESSAGE: `text=${APP_TEXT.REGISTRATION_SUCCESS_MESSAGE}`,
 
   // Product Catalog
   PRODUCT_GRID: "[data-testid='product-grid']",
@@ -39,7 +41,7 @@ const SELECTORS = {
   GRID_VIEW_BUTTON: "[data-testid='view-grid']",
   PRODUCT_CARD: "[data-testid='product-card']",
   PRODUCT_COUNT: "[data-testid='product-count']",
-  PRODUCTS_HEADING: "h1:has-text('All Products')",
+  PRODUCTS_HEADING: `h1:has-text('${APP_TEXT.PRODUCT_HEADING}')`,
   SORT_DROPDOWN: "select",
 };
 

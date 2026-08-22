@@ -2,6 +2,7 @@ const { BasePage } = require("./BasePage");
 const { TIMEOUTS } = require("../constants/timeouts");
 const { SELECTORS } = require("../constants/selectors");
 const { ROUTES } = require("../constants/routes");
+const { APP_TEXT, TEST_VALUES } = require("../constants/constants");
 const logger = require("../utils/logger");
 
 class LoginPage extends BasePage {
@@ -23,17 +24,17 @@ class LoginPage extends BasePage {
   }
 
   async navigate() {
-    logger.info("Navigating to login page");
+    logger.info(`Navigating to ${APP_TEXT.LOGIN_PAGE}`);
     await this.page.goto(ROUTES.LOGIN);
   }
 
   async navigateToExpiredSession() {
-    logger.info("Navigating to login page with expired session");
+    logger.info(`Navigating to ${APP_TEXT.EXPIRED_SESSION_LOGIN_PAGE}`);
     await this.page.goto(ROUTES.EXPIRED_SESSION);
   }
 
   async verifyLoginFormVisible() {
-    logger.info("Verifying login form is visible");
+    logger.info(`Verifying ${APP_TEXT.LOGIN_FORM} is visible`);
     await this.expectAllVisible([
       this.loginForm,
       this.emailInput,
@@ -46,12 +47,12 @@ class LoginPage extends BasePage {
   }
 
   async clickLogin() {
-    logger.info("Clicking Sign In button");
+    logger.info(`Clicking ${APP_TEXT.SIGN_IN_BUTTON}`);
     await this.click(this.signInButton);
   }
 
   async verifyEmptyFormValidation() {
-    logger.info("Verifying empty form validation errors");
+    logger.info(`Verifying ${APP_TEXT.EMPTY_FORM_VALIDATION}`);
     await this.expectVisible(this.emailError);
     await this.expectVisible(this.passwordError);
   }
@@ -68,13 +69,13 @@ class LoginPage extends BasePage {
 
   async verifyInvalidEmailError() {
     logger.info("Verifying invalid email error message");
-    await this.expectContainsText(this.emailError, "valid email");
+    await this.expectContainsText(this.emailError, APP_TEXT.INVALID_EMAIL_ERROR);
   }
 
   async verifyLoginError() {
     logger.info("Verifying login error message");
     await this.expectVisible(this.loginError);
-    await this.expectContainsText(this.loginError, "Invalid");
+    await this.expectContainsText(this.loginError, APP_TEXT.INVALID_LOGIN_ERROR);
   }
 
   async loginAs(email, password) {
@@ -85,31 +86,35 @@ class LoginPage extends BasePage {
   }
 
   async verifyCustomerLoggedIn() {
-    logger.info("Verifying customer is logged in");
+    logger.info(`Verifying ${APP_TEXT.CUSTOMER_LOGGED_IN}`);
     await this.waitForElement(this.userMenu, TIMEOUTS.LONG);
   }
 
   async verifyAdminLoggedIn() {
-    logger.info("Verifying admin is logged in");
+    logger.info(`Verifying ${APP_TEXT.ADMIN_LOGGED_IN}`);
     await this.waitForElement(this.adminMenu, TIMEOUTS.EXTRA_LONG);
   }
 
   async verifyTogglePasswordVisibility() {
-    logger.info("Verifying password toggle visibility");
-    await this.fill(this.passwordInput, "Password@123");
-    await this.expectHasAttribute(this.passwordInput, "type", "password");
+    logger.info(`Verifying ${APP_TEXT.PASSWORD_TOGGLE}`);
+    await this.fill(this.passwordInput, TEST_VALUES.PASSWORD_TOGGLE);
+    await this.expectHasAttribute(this.passwordInput, "type", TEST_VALUES.PASSWORD_INPUT_TYPE);
 
-    logger.info("Clicking password toggle to show password");
+    logger.info(`Clicking ${APP_TEXT.SHOW_PASSWORD}`);
     await this.click(this.togglePassword);
-    await this.expectHasAttribute(this.passwordInput, "type", "text");
+    await this.expectHasAttribute(
+      this.passwordInput,
+      "type",
+      TEST_VALUES.PASSWORD_VISIBLE_INPUT_TYPE,
+    );
 
-    logger.info("Clicking password toggle to hide password");
+    logger.info(`Clicking ${APP_TEXT.HIDE_PASSWORD}`);
     await this.click(this.togglePassword);
-    await this.expectHasAttribute(this.passwordInput, "type", "password");
+    await this.expectHasAttribute(this.passwordInput, "type", TEST_VALUES.PASSWORD_INPUT_TYPE);
   }
 
   async verifySessionExpiredMessage() {
-    logger.info("Verifying session expired message");
+    logger.info(`Verifying ${APP_TEXT.SESSION_EXPIRED_MESSAGE}`);
     await this.expectVisible(this.sessionExpiredMsg);
   }
 }

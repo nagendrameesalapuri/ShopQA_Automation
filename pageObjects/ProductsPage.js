@@ -2,6 +2,7 @@ const { BasePage } = require("../pageObjects/BasePage");
 const { expect } = require("@playwright/test");
 const { SELECTORS } = require("../constants/selectors");
 const { ROUTES } = require("../constants/routes");
+const { APP_TEXT } = require("../constants/constants");
 
 class ProductsPage extends BasePage {
   constructor(page) {
@@ -28,8 +29,8 @@ class ProductsPage extends BasePage {
   }
 
   async verifyProductCount() {
-    await this.expectNotContainsText(this.productCount, "Loading");
-    await this.expectContainsText(this.productCount, "products");
+    await this.expectNotContainsText(this.productCount, APP_TEXT.LOADING_LABEL);
+    await this.expectContainsText(this.productCount, APP_TEXT.PRODUCT_COUNT_LABEL);
     await expect(this.productCards).not.toHaveCount(0);
     const displayedCount = await this.productCount.textContent();
     const countMatch = displayedCount.match(/(\d+)/);
