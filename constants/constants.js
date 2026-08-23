@@ -28,6 +28,8 @@ const APP_TEXT = {
   NETWORKIDLE: "networkidle",
   NO_PRODUCTS_FOUND: "No products found",
   OUT_OF_STOCK: "Out of Stock",
+  WELCOME_MESSAGE: "Welcome back",
+  ADDED_TO_CART_MESSAGE: "Added to cart",
 };
 
 const TEST_VALUES = {

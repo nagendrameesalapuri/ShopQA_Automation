@@ -58,6 +58,23 @@ const SELECTORS = {
   PRODUCT_DETAIL_PRICE: '[data-testid="product-detail-price"]',
   PRODUCT_DETAIL_STOCK: '[data-testid="product-detail-stock"]',
   PRODUCT_DETAIL_RATING: '[data-testid="star-rating"]',
+
+  //CART
+  ADD_TO_CART_BUTTON: '[data-testid="add-to-cart-btn"]',
+  CART_COUNT: '[data-testid="cart-count"]',
+  ALERT: "alert",
+  TOAST: ".Toastify__toast",
+  CART_QUANTITY: "[data-testid='cart-qty']",
+  CART_QUANTITY_INCREASE: "[data-testid='qty-increase']",
+  CART_QUANTITY_DECREASE: "[data-testid='qty-decrease']",
+  REMOVE_ITEM_BUTTON: '[data-testid="remove-item-btn"]',
+  COUPON_INPUT: '[data-testid="coupon-input"]',
+  APPLY_COUPON_BUTTON: '[data-testid="apply-coupon-btn"]',
+  COUPON_SUCCESS: '[data-testid="coupon-success"]',
+  DISCOUNT_AMOUNT: '[data-testid="discount-amount"]',
+  COUPON_ERROR: '[data-testid="coupon-error"]',
+  CART_SUBTOTAL: '[data-testid="cart-subtotal"]',
+  CART_TOTAL: '[data-testid="cart-total"]',
 };
 
 module.exports = { SELECTORS };

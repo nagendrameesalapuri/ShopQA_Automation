@@ -3,6 +3,7 @@ const { TIMEOUTS } = require("../constants/timeouts");
 const { SELECTORS } = require("../constants/selectors");
 const { ROUTES } = require("../constants/routes");
 const { APP_TEXT, TEST_VALUES } = require("../constants/constants");
+const { loginData } = require("../testData/loginData");
 const logger = require("../utils/logger");
 
 class LoginPage extends BasePage {
@@ -21,6 +22,7 @@ class LoginPage extends BasePage {
     this.adminMenu = page.locator(SELECTORS.ADMIN_DASHBOARD);
     this.sessionExpiredMsg = page.locator(SELECTORS.SESSION_EXPIRED_MSG);
     this.forgotPasswordLink = page.locator(SELECTORS.FORGOT_PASSWORD_LINK);
+    this.successToast = page.getByRole(SELECTORS.ALERT);
   }
 
   async navigate() {
@@ -78,11 +80,17 @@ class LoginPage extends BasePage {
     await this.expectContainsText(this.loginError, APP_TEXT.INVALID_LOGIN_ERROR);
   }
 
-  async loginAs(email, password) {
-    logger.info(`Attempting to login as: ${email}`);
-    await this.enterEmail(email);
-    await this.enterPassword(password);
+  async loginAs(role = "customer") {
+    const credentials = loginData[role];
+    if (!credentials) {
+      throw new Error(`Invalid login role: ${role}`);
+    }
+    logger.info(`Attempting to login as: ${role}`);
+    await this.enterEmail(credentials.email);
+    await this.enterPassword(credentials.password);
     await this.clickLogin();
+    await this.expectContainsText(this.successToast, APP_TEXT.WELCOME_MESSAGE);
+    logger.info(`Successfully logged in as: ${role}`);
   }
 
   async verifyCustomerLoggedIn() {
