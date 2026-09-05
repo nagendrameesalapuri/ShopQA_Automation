@@ -91,12 +91,14 @@ test.describe("Shopping Cart", () => {
     await cartPage.navigateToCartPage();
     const subtotal = await cartPage.getCartSubtotal();
     logger.info(`Subtotal before coupon: ₹${subtotal}`);
+
     await cartPage.applyCoupon(CartData.valid.coupon);
     await cartPage.verifyCouponApplied();
     const discount = await cartPage.getDiscountAmount();
     const total = await cartPage.getCartTotal();
     logger.info(`Discount applied: ₹${discount}`);
     logger.info(`Final total: ₹${total}`);
+
     // 18% GST is calculated after discount
     const taxableAmount = subtotal - discount;
     const expectedTax = taxableAmount * 0.18;
