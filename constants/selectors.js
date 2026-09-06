@@ -85,6 +85,10 @@ const SELECTORS = {
   CHECK_OUT_CITY: '[data-testid="field-city"]',
   CHECK_OUT_STATE: '[data-testid="field-state"]',
   CHECK_OUT_POSTAL_CODE: '[data-testid="field-postal"]',
+
+  //DASHBOARD
+  SEARCH_INPUT: "[data-testid='nav-search-input']",
+  SEARCH_BUTTON: "[data-testid='nav-search-btn']",
 };
 
 module.exports = { SELECTORS };
