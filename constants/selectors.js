@@ -75,6 +75,16 @@ const SELECTORS = {
   COUPON_ERROR: '[data-testid="coupon-error"]',
   CART_SUBTOTAL: '[data-testid="cart-subtotal"]',
   CART_TOTAL: '[data-testid="cart-total"]',
+
+  //CHECK OUT
+  CHECK_OUT_STEP: "[data-testid='step-indicator'] [data-testid^='step-']",
+  CHECK_OUT_NEXT_STEP: '[data-testid="btn-next"]',
+  CHECK_OUT_FULL_NAME: '[data-testid="field-full-name"]',
+  CHECK_OUT_PHONE: '[data-testid="field-phone"]',
+  CHECK_OUT_ADDRESS_LINE1: '[data-testid="field-line1"]',
+  CHECK_OUT_CITY: '[data-testid="field-city"]',
+  CHECK_OUT_STATE: '[data-testid="field-state"]',
+  CHECK_OUT_POSTAL_CODE: '[data-testid="field-postal"]',
 };
 
 module.exports = { SELECTORS };
