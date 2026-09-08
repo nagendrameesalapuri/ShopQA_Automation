@@ -129,6 +129,11 @@ const SELECTORS = {
   ADMIN_SAVE_COUPON_BUTTON: '[data-testid="btn-save-coupon"]',
   ADMIN_ERROR_TOAST: ".Toastify__toast--error",
 
+  // INTERACTIVE AND ACCESSIBILITY
+  HOME_SEARCH_REGION: '[data-testid="navbar"] [role="search"]',
+  SEARCH_ACCESSIBLE_INPUT: '[data-testid="navbar"] [aria-label="Search products"]',
+  ADMIN_CLOSE_MODAL_BUTTON: 'button[aria-label="Close modal"]',
+
   //DASHBOARD
   SEARCH_INPUT: "[data-testid='nav-search-input']",
   SEARCH_BUTTON: "[data-testid='nav-search-btn']",

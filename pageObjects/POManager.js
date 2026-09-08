@@ -6,6 +6,7 @@ const { CheckoutPage } = require("./CheckoutPage");
 const { DashboardPage } = require("./DashboardPage");
 const { OrdersPage } = require("./OrdersPage");
 const { AdminPage } = require("./AdminPage");
+const { AccessibilityPage } = require("./AccessibilityPage");
 
 class POManager {
   constructor(page) {
@@ -18,6 +19,7 @@ class POManager {
     this.dashboardPage = new DashboardPage(page);
     this.ordersPage = new OrdersPage(page);
     this.adminPage = new AdminPage(page);
+    this.accessibilityPage = new AccessibilityPage(page);
   }
 
   getLoginPage() {
@@ -50,6 +52,10 @@ class POManager {
 
   getAdminPage() {
     return this.adminPage;
+  }
+
+  getAccessibilityPage() {
+    return this.accessibilityPage;
   }
 }
 

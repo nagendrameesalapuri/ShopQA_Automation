@@ -16,6 +16,7 @@ class AdminPage extends BasePage {
     this.accessDenied = page.locator(SELECTORS.ADMIN_ACCESS_DENIED);
     this.addProductButton = page.locator(SELECTORS.ADMIN_ADD_PRODUCT_BUTTON);
     this.productFormModal = page.locator(SELECTORS.ADMIN_PRODUCT_FORM_MODAL);
+    this.closeModalButton = page.locator(SELECTORS.ADMIN_CLOSE_MODAL_BUTTON);
     this.saveProductButton = page.locator(SELECTORS.ADMIN_SAVE_PRODUCT_BUTTON);
     this.productNameError = page.locator(SELECTORS.ADMIN_PRODUCT_NAME_ERROR);
     this.imageDropzone = page.locator(SELECTORS.ADMIN_IMAGE_DROPZONE);
@@ -85,6 +86,23 @@ class AdminPage extends BasePage {
   async verifyImageDropzoneVisible() {
     logger.info("Verifying product image dropzone is visible");
     await expect(this.imageDropzone).toBeVisible();
+  }
+
+  async verifyDropzoneDragOver() {
+    logger.info("Verifying image dropzone drag-over state");
+    await expect(this.imageDropzone).toBeVisible();
+    await this.imageDropzone.evaluate((element) => {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(new File(["test"], "test.png", { type: "image/png" }));
+      element.dispatchEvent(new DragEvent("dragover", { bubbles: true, dataTransfer }));
+    });
+    await expect(this.imageDropzone).toHaveClass(/drag-over/);
+  }
+
+  async closeProductModal() {
+    logger.info("Closing product form modal");
+    await this.click(this.closeModalButton);
+    await expect(this.productFormModal).not.toBeVisible();
   }
 
   async openCreateCouponForm() {
