@@ -1,6 +1,6 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const logger = require("../../utils/logger");
 
 test.describe("Orders", () => {
   let loginPage;
@@ -14,7 +14,7 @@ test.describe("Orders", () => {
     await loginPage.loginAs("customer");
   });
 
-  test("should display order history", async () => {
+  test("@sanity should display order history", async () => {
     const testName = "should display order history";
     logger.testStart(testName);
     await ordersPage.navigateToOrdersPage();
@@ -22,7 +22,7 @@ test.describe("Orders", () => {
     logger.testPass(testName);
   });
 
-  test("should filter orders by status", async () => {
+  test("@regression should filter orders by status", async () => {
     const testName = "should filter orders by status";
     const status = "delivered";
     logger.testStart(testName);

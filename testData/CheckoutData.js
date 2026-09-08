@@ -1,4 +1,5 @@
 const CheckoutData = {
+  deliveryOptions: ["standard", "express", "overnight", "pickup"],
   testDate: {
     monthOffset: 1,
     day: 10,

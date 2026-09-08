@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const { CheckoutData } = require("../testData/CheckoutData");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const { CheckoutData } = require("../../testData/CheckoutData");
+const logger = require("../../utils/logger");
 
 test.describe("Checkout", () => {
   let loginPage;
@@ -28,14 +28,14 @@ test.describe("Checkout", () => {
     await loginPage.loginAs("customer");
   });
 
-  test("should show step indicator with 4 steps", async () => {
+  test("@sanity should show step indicator with 4 steps", async () => {
     logger.testStart("should show step indicator with 4 steps");
     await openCheckoutForProduct();
     await checkoutPage.verifyStepIndicatorCount(4);
     logger.testPass("should show step indicator with 4 steps");
   });
 
-  test("should validate required shipping fields", async () => {
+  test("@regression should validate required shipping fields", async () => {
     logger.testStart("should validate required shipping fields");
     await openCheckoutForProduct();
     await checkoutPage.clickNext();
@@ -43,7 +43,7 @@ test.describe("Checkout", () => {
     logger.testPass("should validate required shipping fields");
   });
 
-  test("should validate postal code format", async () => {
+  test("@regression should validate postal code format", async () => {
     logger.testStart("should validate postal code format");
     await openCheckoutForProduct();
     await checkoutPage.enterShippingDetails({
@@ -59,7 +59,7 @@ test.describe("Checkout", () => {
     logger.testPass("should validate postal code format");
   });
 
-  test("should navigate through all checkout steps", async () => {
+  test("@sanity should navigate through all checkout steps", async () => {
     logger.testStart("should navigate through all checkout steps");
     const deliveryType = "express";
     await openCheckoutForProduct();
@@ -82,7 +82,7 @@ test.describe("Checkout", () => {
     logger.testPass("should navigate through all checkout steps");
   });
 
-  test("should simulate payment failure with declined card", async () => {
+  test("@regression should simulate payment failure with declined card", async () => {
     const testName = "should simulate payment failure with declined card";
     logger.testStart(testName);
     await openCheckoutForProduct();
@@ -107,7 +107,7 @@ test.describe("Checkout", () => {
     logger.testPass(testName);
   });
 
-  test("should select date from date picker", async () => {
+  test("@regression should select date from date picker", async () => {
     const testName = "should select date from date picker";
     logger.testStart(testName);
     await openCheckoutForProduct();

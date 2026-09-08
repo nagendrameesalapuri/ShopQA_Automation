@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const { CheckoutData } = require("../testData/CheckoutData");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const { CheckoutData } = require("../../testData/CheckoutData");
+const logger = require("../../utils/logger");
 
 test.describe("Interactive Elements", () => {
   let loginPage;
@@ -17,14 +17,14 @@ test.describe("Interactive Elements", () => {
     await adminPage.openAddProductModal();
   });
 
-  test("should perform file upload via drag-and-drop", async () => {
+  test("@regression should perform file upload via drag-and-drop", async () => {
     const testName = "should perform file upload via drag-and-drop";
     logger.testStart(testName);
     await adminPage.verifyDropzoneDragOver();
     logger.testPass(testName);
   });
 
-  test("should open and close modal popup", async () => {
+  test("@regression should open and close modal popup", async () => {
     const testName = "should open and close modal popup";
     logger.testStart(testName);
     await adminPage.closeProductModal();
@@ -53,7 +53,7 @@ test.describe("Checkout Date Picker", () => {
     await checkoutPage.clickNext();
   });
 
-  test("should open date picker and select a date", async () => {
+  test("@regression should open date picker and select a date", async () => {
     const testName = "should open date picker and select a date";
     logger.testStart(testName);
     await checkoutPage.openDatePicker();

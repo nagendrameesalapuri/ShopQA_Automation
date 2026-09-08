@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "test:e2e": "playwright test tests/e2e",
+    "test:e2e": "playwright test --grep @e2e",
     "test:chrome": "playwright test --project=chromium",
     "test:firefox": "playwright test --project=firefox",
     "test:webkit": "playwright test --project=webkit",
@@ -14,6 +14,7 @@
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
     "test:smoke": "playwright test --grep @smoke",
+    "test:sanity": "playwright test --grep @sanity",
     "test:regression": "playwright test --grep @regression",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",

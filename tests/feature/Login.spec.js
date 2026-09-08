@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const { loginData } = require("../testData/loginData");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const { loginData } = require("../../testData/loginData");
+const logger = require("../../utils/logger");
 
 test.describe("Login Tests", () => {
   let loginPage;

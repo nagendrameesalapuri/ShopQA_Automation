@@ -3,7 +3,7 @@ const { POManager } = require("../../pageObjects/POManager");
 const { CheckoutData } = require("../../testData/CheckoutData");
 const logger = require("../../utils/logger");
 
-test.describe("E2E: Customer checkout journey", () => {
+test.describe("@e2e E2E: Customer checkout journey", () => {
   test("customer can move from product search to order review", async ({ page }) => {
     const testName = "customer can move from product search to order review";
     const poManager = new POManager(page);
