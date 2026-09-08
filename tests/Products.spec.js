@@ -2,6 +2,7 @@ const { test } = require("@playwright/test");
 const { POManager } = require("../pageObjects/POManager");
 const { APP_TEXT } = require("../constants/constants");
 const { ROUTES } = require("../constants/routes");
+const logger = require("../utils/logger");
 
 test.describe("Product Catalog", () => {
   let productsPage;

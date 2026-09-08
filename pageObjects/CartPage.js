@@ -17,6 +17,7 @@ class CartPage extends BasePage {
     this.removeItemButton = page.locator(SELECTORS.REMOVE_ITEM_BUTTON);
     this.couponInput = page.locator(SELECTORS.COUPON_INPUT);
     this.applyCouponButton = page.locator(SELECTORS.APPLY_COUPON_BUTTON);
+    this.removeCouponButton = page.getByRole("button", { name: /[✕×]/ });
     this.couponSuccess = page.locator(SELECTORS.COUPON_SUCCESS);
     this.couponError = page.locator(SELECTORS.COUPON_ERROR);
     this.discountAmount = page.locator(SELECTORS.DISCOUNT_AMOUNT);
@@ -101,6 +102,13 @@ class CartPage extends BasePage {
 
   async applyCoupon(couponCode) {
     logger.info(`Applying coupon: ${couponCode}`);
+    await this.navigateToCartPage();
+    await expect(this.couponInput.or(this.removeCouponButton)).toBeVisible();
+    if (!(await this.couponInput.isVisible())) {
+      logger.info("Removing previously applied coupon");
+      await this.click(this.removeCouponButton.last());
+    }
+    await this.waitForElement(this.couponInput);
     await this.fill(this.couponInput, couponCode);
     await this.click(this.applyCouponButton);
     logger.info(`Coupon applied: ${couponCode}`);

@@ -29,7 +29,7 @@ class ProductsPage extends BasePage {
     this.productDetailName = page.locator(SELECTORS.PRODUCT_DETAIL_NAME);
     this.productDetailPrice = page.locator(SELECTORS.PRODUCT_DETAIL_PRICE);
     this.productDetailStock = page.locator(SELECTORS.PRODUCT_DETAIL_STOCK);
-    this.productDetailRating = page.locator(SELECTORS.PRODUCT_DETAIL_RATING);
+    this.productDetailRating = page.locator(SELECTORS.PRODUCT_DETAIL_RATING).first();
   }
 
   async navigateToProductsPage() {

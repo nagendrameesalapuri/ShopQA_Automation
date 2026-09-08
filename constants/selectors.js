@@ -71,6 +71,7 @@ const SELECTORS = {
   REMOVE_ITEM_BUTTON: '[data-testid="remove-item-btn"]',
   COUPON_INPUT: '[data-testid="coupon-input"]',
   APPLY_COUPON_BUTTON: '[data-testid="apply-coupon-btn"]',
+  REMOVE_COUPON_BUTTON: 'button:has-text("✕")',
   COUPON_SUCCESS: '[data-testid="coupon-success"]',
   DISCOUNT_AMOUNT: '[data-testid="discount-amount"]',
   COUPON_ERROR: '[data-testid="coupon-error"]',
