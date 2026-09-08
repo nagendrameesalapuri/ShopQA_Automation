@@ -10,7 +10,7 @@ class CartPage extends BasePage {
     super(page);
     this.addToCartButton = page.locator(SELECTORS.ADD_TO_CART_BUTTON);
     this.cartCount = page.locator(SELECTORS.CART_COUNT);
-    this.toast = page.locator(SELECTORS.TOAST);
+    this.toast = page.locator(SELECTORS.CART_TOAST);
     this.cartQtyIncrease = page.locator(SELECTORS.CART_QUANTITY_INCREASE);
     this.cartQtyDecrease = page.locator(SELECTORS.CART_QUANTITY_DECREASE);
     this.cartQty = page.locator(SELECTORS.CART_QUANTITY);
@@ -22,6 +22,7 @@ class CartPage extends BasePage {
     this.discountAmount = page.locator(SELECTORS.DISCOUNT_AMOUNT);
     this.cartSubtotal = page.locator(SELECTORS.CART_SUBTOTAL);
     this.cartTotal = page.locator(SELECTORS.CART_TOTAL);
+    this.checkoutButton = page.locator(SELECTORS.PROCEED_CHECKOUT_BUTTON);
   }
 
   async navigateToCartPage() {
@@ -158,6 +159,14 @@ class CartPage extends BasePage {
     logger.info("Getting discount amount");
     const text = await this.discountAmount.textContent();
     return parseFloat(text.replace(/[^0-9.]/g, ""));
+  }
+
+  async clickProceedToCheckout() {
+    logger.info("Navigating to cart before checkout");
+    await this.navigateToCartPage();
+    await this.waitForElement(this.checkoutButton);
+    logger.info("Clicking proceed to check out");
+    await this.click(this.checkoutButton);
   }
 }
 

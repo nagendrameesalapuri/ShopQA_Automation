@@ -3,6 +3,7 @@ const { CustomAssertions } = require("../utils/assertions");
 const { SELECTORS } = require("../constants/selectors");
 const { ROUTES } = require("../constants/routes");
 const { APP_TEXT } = require("../constants/constants");
+const logger = require("../utils/logger");
 
 class RegistrationPage extends BasePage {
   constructor(page) {
@@ -23,10 +24,12 @@ class RegistrationPage extends BasePage {
   }
 
   async navigateToRegistrationPage() {
+    logger.info(`Navigating to registration page: ${ROUTES.REGISTRATION}`);
     await this.page.goto(ROUTES.REGISTRATION);
   }
 
   async verifyRegistrationFormVisible() {
+    logger.info("Verifying registration form fields are visible");
     await this.expectAllVisible([
       this.registrationForm,
       this.firstNameInput,
@@ -41,15 +44,18 @@ class RegistrationPage extends BasePage {
   }
 
   async clickCreateAccount() {
+    logger.info("Clicking Create Account button");
     await this.click(this.createAccountButton);
   }
 
   async verifyEmptyFormValidation() {
+    logger.info("Verifying empty form validation errors");
     await CustomAssertions.expectElementCount(this.requiredError, 4);
     await this.expectAllVisible(await this.requiredError.all());
   }
 
   async signupWith(firstName, lastName, email, password, confirmPassword, phone) {
+    logger.info(`Signing up new user: ${email}`);
     await this.fill(this.firstNameInput, firstName);
     await this.fill(this.lastNameInput, lastName);
     await this.fill(this.emailInput, email);
@@ -60,18 +66,22 @@ class RegistrationPage extends BasePage {
   }
 
   async verifyInvalidEmailError() {
+    logger.info("Verifying invalid email error during registration");
     await this.expectContainsText(this.requiredError, APP_TEXT.INVALID_EMAIL_MESSAGE);
   }
 
   async verifyWeakPassword() {
+    logger.info("Verifying weak password validation message");
     await this.expectContainsText(this.passwordStrength, APP_TEXT.WEAK_PASSWORD_MESSAGE);
   }
 
   async verifyPasswordMismatchError() {
+    logger.info("Verifying password mismatch error");
     await this.expectVisible(this.confirmPasswordError);
   }
 
   async verifyRegistrationSuccess() {
+    logger.info("Verifying successful registration message");
     await this.expectVisible(this.registrationSuccessMsg);
   }
 }
