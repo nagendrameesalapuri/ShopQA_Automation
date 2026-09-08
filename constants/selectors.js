@@ -102,6 +102,12 @@ const SELECTORS = {
   CHECK_OUT_DATE_PICKER_NEXT_MONTH: '[data-testid="dp-next-month"]',
   CHECK_OUT_DATE_PICKER_DAY: '[data-testid^="dp-day-"]',
 
+  // ORDERS
+  ORDERS_PAGE: '[data-testid="orders-page"]',
+  ORDER_STATUS_FILTER: '[data-testid="order-status-filter"]',
+  ORDER_STATUS_BADGE: '[data-testid="order-status-badge"]',
+  ORDERS_EMPTY_STATE: 'h3:has-text("No orders yet")',
+
   //DASHBOARD
   SEARCH_INPUT: "[data-testid='nav-search-input']",
   SEARCH_BUTTON: "[data-testid='nav-search-btn']",

@@ -4,6 +4,7 @@ const ROUTES = {
   REGISTRATION: "/register",
   PRODUCTS: "/products",
   CART: "/cart",
+  ORDERS: "/orders",
   OUT_OF_STOCK: "/products?inStock=false",
   SORTING: "**/products?**sort=price_asc**",
 };
