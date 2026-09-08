@@ -3,7 +3,7 @@ const { POManager } = require("../../pageObjects/POManager");
 const { AdminData } = require("../../testData/AdminData");
 const logger = require("../../utils/logger");
 
-test.describe("Admin Panel", () => {
+test.describe("@admin Admin Panel", () => {
   let loginPage;
   let adminPage;
 

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "playwright test",
     "test:e2e": "playwright test --grep @e2e",
+    "test:admin": "playwright test --grep @admin",
     "test:chrome": "playwright test --project=chromium",
     "test:firefox": "playwright test --project=firefox",
     "test:webkit": "playwright test --project=webkit",
