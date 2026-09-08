@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const logger = require("../utils/logger");
-const { createValidUser, registerData } = require("../testData/registerData");
+const { POManager } = require("../../pageObjects/POManager");
+const logger = require("../../utils/logger");
+const { createValidUser, registerData } = require("../../testData/registerData");
 
 test.describe("Registration Tests", () => {
   let registrationPage;

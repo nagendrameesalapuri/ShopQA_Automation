@@ -2,7 +2,7 @@ const { test } = require("@playwright/test");
 const { POManager } = require("../../pageObjects/POManager");
 const logger = require("../../utils/logger");
 
-test.describe("E2E: Authentication and authorization", () => {
+test.describe("@e2e E2E: Authentication and authorization", () => {
   test("customer can authenticate and access order history", async ({ page }) => {
     const testName = "customer can authenticate and access order history";
     const poManager = new POManager(page);

@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const logger = require("../utils/logger");
-const { CartData } = require("../testData/CartData");
+const { POManager } = require("../../pageObjects/POManager");
+const logger = require("../../utils/logger");
+const { CartData } = require("../../testData/CartData");
 
 test.describe("Shopping Cart", () => {
   let productsPage;
@@ -33,7 +33,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should show toast on add to cart");
   });
 
-  test("@smoke should update quantity in cart", async () => {
+  test("@regression should update quantity in cart", async () => {
     logger.testStart("should update quantity in cart");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -46,7 +46,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should update quantity in cart");
   });
 
-  test("@smoke should remove item from cart", async () => {
+  test("@regression should remove item from cart", async () => {
     logger.testStart("should remove item from cart");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -59,7 +59,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should remove item from cart");
   });
 
-  test("@smoke should reject invalid coupon", async () => {
+  test("@regression should reject invalid coupon", async () => {
     logger.testStart("should reject invalid coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -68,7 +68,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should reject invalid coupon");
   });
 
-  test("should reject expired coupon", async ({ page }) => {
+  test("@regression should reject expired coupon", async ({ page }) => {
     logger.testStart("should reject invalid coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -77,7 +77,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should reject invalid coupon");
   });
 
-  test("@smoke should apply valid coupon", async () => {
+  test("@regression should apply valid coupon", async () => {
     logger.testStart("should apply valid coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -85,7 +85,7 @@ test.describe("Shopping Cart", () => {
     await cartPage.verifyCouponApplied();
     logger.testPass("should apply valid coupon");
   });
-  test("@smoke should show correct total with coupon", async ({ page }) => {
+  test("@regression should show correct total with coupon", async ({ page }) => {
     logger.testStart("verify correct total with coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();

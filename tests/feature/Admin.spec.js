@@ -1,7 +1,7 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const { AdminData } = require("../testData/AdminData");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const { AdminData } = require("../../testData/AdminData");
+const logger = require("../../utils/logger");
 
 test.describe("Admin Panel", () => {
   let loginPage;
@@ -16,14 +16,14 @@ test.describe("Admin Panel", () => {
     await adminPage.navigateToAdminDashboard();
   });
 
-  test("should display dashboard stats", async () => {
+  test("@smoke @sanity should display dashboard stats", async () => {
     const testName = "should display dashboard stats";
     logger.testStart(testName);
     await adminPage.verifyDashboardStatsVisible();
     logger.testPass(testName);
   });
 
-  test("should navigate to products page", async ({ page }) => {
+  test("@sanity should navigate to products page", async ({ page }) => {
     const testName = "should navigate to products page";
     logger.testStart(testName);
     await adminPage.navigateToProductsFromSidebar();
@@ -31,14 +31,14 @@ test.describe("Admin Panel", () => {
     logger.testPass(testName);
   });
 
-  test("should show orders table", async () => {
+  test("@regression should show orders table", async () => {
     const testName = "should show orders table";
     logger.testStart(testName);
     await adminPage.verifyOrdersTableVisible();
     logger.testPass(testName);
   });
 
-  test("should deny access to non-admin user", async () => {
+  test("@regression should deny access to non-admin user", async () => {
     const testName = "should deny access to non-admin user";
     logger.testStart(testName);
     await loginPage.navigate();
@@ -49,7 +49,7 @@ test.describe("Admin Panel", () => {
   });
 
   test.describe("Product Management", () => {
-    test("should open add product modal", async () => {
+    test("@regression should open add product modal", async () => {
       const testName = "should open add product modal";
       logger.testStart(testName);
       await adminPage.navigateToProductsPage();
@@ -57,7 +57,7 @@ test.describe("Admin Panel", () => {
       logger.testPass(testName);
     });
 
-    test("should validate product form", async () => {
+    test("@regression should validate product form", async () => {
       const testName = "should validate product form";
       logger.testStart(testName);
       await adminPage.navigateToProductsPage();
@@ -67,7 +67,7 @@ test.describe("Admin Panel", () => {
       logger.testPass(testName);
     });
 
-    test("should show product image dropzone", async () => {
+    test("@regression should show product image dropzone", async () => {
       const testName = "should show product image dropzone";
       logger.testStart(testName);
       await adminPage.navigateToProductsPage();
@@ -78,7 +78,7 @@ test.describe("Admin Panel", () => {
   });
 
   test.describe("Coupon Management", () => {
-    test("should create a new coupon", async () => {
+    test("@regression should create a new coupon", async () => {
       const testName = "should create a new coupon";
       const coupon = AdminData.coupons.newCoupon;
       logger.testStart(testName);
@@ -89,7 +89,7 @@ test.describe("Admin Panel", () => {
       logger.testPass(testName);
     });
 
-    test("should prevent duplicate coupon codes", async () => {
+    test("@regression should prevent duplicate coupon codes", async () => {
       const testName = "should prevent duplicate coupon codes";
       const coupon = AdminData.coupons.existingCoupon;
       logger.testStart(testName);

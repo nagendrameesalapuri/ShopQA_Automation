@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const logger = require("../../utils/logger");
 
 test.describe("Checkout", () => {
   let loginPage;
@@ -14,7 +14,7 @@ test.describe("Checkout", () => {
     await loginPage.loginAs("customer");
   });
 
-  test("should search product", async ({ page }) => {
+  test("@smoke @sanity should search product", async ({ page }) => {
     logger.testStart("should search product");
     const productName = "iPhone";
     logger.info(`Starting product search for: ${productName}`);

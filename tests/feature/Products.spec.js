@@ -1,8 +1,8 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const { APP_TEXT } = require("../constants/constants");
-const { ROUTES } = require("../constants/routes");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const { APP_TEXT } = require("../../constants/constants");
+const { ROUTES } = require("../../constants/routes");
+const logger = require("../../utils/logger");
 
 test.describe("Product Catalog", () => {
   let productsPage;
@@ -19,7 +19,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should display product listing page");
   });
 
-  test("@smoke should verify page heading, product count and product cards", async () => {
+  test("@smoke @sanity should verify page heading, product count and product cards", async () => {
     logger.testStart("should verify page heading, product count and product cards");
     await productsPage.verifyPageHeading();
     await productsPage.verifyProductCount();
@@ -32,13 +32,13 @@ test.describe("Product Catalog", () => {
     logger.testPass("should verify default sorting");
   });
 
-  test("@smoke should verify grid and list views", async () => {
+  test("@regression should verify grid and list views", async () => {
     logger.testStart("should verify grid and list views");
     await productsPage.verifyGridAndListViews();
     logger.testPass("should verify grid and list views");
   });
 
-  test("@smoke should filter products by category", async ({ page }) => {
+  test("@regression should filter products by category", async ({ page }) => {
     logger.testStart("should filter products by category");
     await productsPage.selectCategory("books");
     await productsPage.verifyCategorySelected("books");
@@ -46,7 +46,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should filter products by category");
   });
 
-  test("@smoke should sort products by price ascending", async ({ page }) => {
+  test("@regression should sort products by price ascending", async ({ page }) => {
     logger.testStart("should sort products by price ascending");
     await productsPage.sortProductsByValue(APP_TEXT.PRICE_ASC);
     await page.waitForURL(ROUTES.SORTING);
@@ -62,7 +62,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should search for products");
   });
 
-  test("@smoke should show no results for invalid search", async ({ page }) => {
+  test("@regression should show no results for invalid search", async ({ page }) => {
     logger.testStart("should show no results for invalid search");
     await productsPage.searchProduct("nagendra1234");
     await productsPage.verifySearchURL("nagendra1234");
@@ -70,7 +70,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should show no results for invalid search");
   });
 
-  test("@smoke should paginate products", async ({ page }) => {
+  test("@regression should paginate products", async ({ page }) => {
     logger.testStart("should paginate products");
     await productsPage.sortProductsByValue(APP_TEXT.A_TO_Z);
     const beforeFirst = await productsPage.getFirstProductName();
@@ -80,19 +80,19 @@ test.describe("Product Catalog", () => {
     logger.testPass("should paginate products");
   });
 
-  test("@smoke should enable infinite scroll", async ({ page }) => {
+  test("@regression should enable infinite scroll", async ({ page }) => {
     logger.testStart("should enable infinite scroll");
     await productsPage.verifyInfiniteScroll();
     logger.testPass("should enable infinite scroll");
   });
 
-  test("@smoke should show out-of-stock badge", async ({ page }) => {
+  test("@regression should show out-of-stock badge", async ({ page }) => {
     logger.testStart("should show out-of-stock badge");
     await productsPage.verifyOutOfStockBadge();
     logger.testPass("should show out-of-stock badge");
   });
 
-  test("@smoke should display full product details", async ({ page }) => {
+  test("@regression should display full product details", async ({ page }) => {
     logger.testStart("should display full product details");
     await productsPage.verifyProductDetails();
     logger.testPass("should display full product details");

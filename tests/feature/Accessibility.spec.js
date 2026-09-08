@@ -1,6 +1,6 @@
 const { test } = require("@playwright/test");
-const { POManager } = require("../pageObjects/POManager");
-const logger = require("../utils/logger");
+const { POManager } = require("../../pageObjects/POManager");
+const logger = require("../../utils/logger");
 
 test.describe("Accessibility", () => {
   let accessibilityPage;
@@ -10,7 +10,7 @@ test.describe("Accessibility", () => {
     accessibilityPage = poManager.getAccessibilityPage();
   });
 
-  test("should have proper ARIA labels on navigation", async () => {
+  test("@regression should have proper ARIA labels on navigation", async () => {
     const testName = "should have proper ARIA labels on navigation";
     logger.testStart(testName);
     await accessibilityPage.navigateHome();
@@ -18,7 +18,7 @@ test.describe("Accessibility", () => {
     logger.testPass(testName);
   });
 
-  test("should be keyboard navigable", async () => {
+  test("@regression should be keyboard navigable", async () => {
     const testName = "should be keyboard navigable";
     logger.testStart(testName);
     await accessibilityPage.navigateToLogin();
@@ -26,7 +26,7 @@ test.describe("Accessibility", () => {
     logger.testPass(testName);
   });
 
-  test("should have correct page title", async () => {
+  test("@sanity should have correct page title", async () => {
     const testName = "should have correct page title";
     logger.testStart(testName);
     await accessibilityPage.navigateHome();

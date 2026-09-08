@@ -2,7 +2,7 @@ const { test } = require("@playwright/test");
 const { POManager } = require("../../pageObjects/POManager");
 const logger = require("../../utils/logger");
 
-test.describe("E2E: Storefront journey", () => {
+test.describe("@e2e E2E: Storefront journey", () => {
   test("customer can search the catalog and view product details", async ({ page }) => {
     const testName = "customer can search the catalog and view product details";
     const poManager = new POManager(page);
