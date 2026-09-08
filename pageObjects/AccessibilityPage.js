@@ -32,8 +32,8 @@ class AccessibilityPage extends BasePage {
     logger.info("Verifying keyboard navigation reaches a tagged control");
     await this.loginEmailInput.focus();
     await this.page.keyboard.press("Tab");
-    const focusedTestId = await this.page.evaluate(
-      () => document.activeElement?.getAttribute("data-testid"),
+    const focusedTestId = await this.page.evaluate(() =>
+      document.activeElement?.getAttribute("data-testid"),
     );
     expect(focusedTestId).toBeTruthy();
   }

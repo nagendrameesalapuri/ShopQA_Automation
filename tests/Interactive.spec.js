@@ -30,7 +30,6 @@ test.describe("Interactive Elements", () => {
     await adminPage.closeProductModal();
     logger.testPass(testName);
   });
-
 });
 
 test.describe("Checkout Date Picker", () => {
