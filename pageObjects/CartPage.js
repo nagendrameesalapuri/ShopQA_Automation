@@ -51,7 +51,7 @@ class CartPage extends BasePage {
   }
 
   async verifyToastMessageForAddToCart() {
-    logger.info(`Verifying add cart toast message`);
+    logger.info("Verifying add cart toast message");
     await this.expectContainsText(this.toast, APP_TEXT.ADDED_TO_CART_MESSAGE);
   }
 

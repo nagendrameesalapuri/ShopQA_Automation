@@ -37,6 +37,26 @@ jobs:
       - name: Check test environment
         run: curl --fail --silent --show-error --head https://nagendra-shopqa.netlify.app
 
+      - name: Validate CI credentials
+        shell: bash
+        env:
+          USERNAME_CUSTOMER: ${{ secrets.USERNAME_CUSTOMER }}
+          PASSWORD_CUSTOMER: ${{ secrets.PASSWORD_CUSTOMER }}
+          USERNAME_ADMIN: ${{ secrets.USERNAME_ADMIN }}
+          PASSWORD_ADMIN: ${{ secrets.PASSWORD_ADMIN }}
+        run: |
+          missing=0
+          for name in USERNAME_CUSTOMER PASSWORD_CUSTOMER USERNAME_ADMIN PASSWORD_ADMIN; do
+            if [ -z "${!name}" ]; then
+              echo "Missing GitHub Actions secret: $name"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "Configure the required repository secrets before running Playwright tests."
+            exit 1
+          fi
+
       - name: Run tests (${{ matrix.browser }})
         run: npx playwright test --project=${{ matrix.browser }}
         env:

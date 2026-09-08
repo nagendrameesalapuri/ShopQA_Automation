@@ -233,6 +233,14 @@ Traces are captured on first retry and saved in `test-results/`
 - Store credentials in GitHub Secrets for CI/CD (`USERNAME_CUSTOMER`, `PASSWORD_CUSTOMER`, `USERNAME_ADMIN`, `PASSWORD_ADMIN`)
 - Rotate test credentials regularly
 
+GitHub Actions requires these four repository secrets before authenticated tests can run:
+
+1. Open the repository settings.
+2. Select **Secrets and variables** > **Actions**.
+3. Add `USERNAME_CUSTOMER`, `PASSWORD_CUSTOMER`, `USERNAME_ADMIN`, and `PASSWORD_ADMIN`.
+
+The workflow validates these secrets before starting Playwright.
+
 ## 📚 Resources
 
 - [Playwright Documentation](https://playwright.dev)
