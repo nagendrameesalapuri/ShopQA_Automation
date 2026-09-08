@@ -68,7 +68,7 @@ test.describe("Shopping Cart", () => {
     logger.testPass("should reject invalid coupon");
   });
 
-  test("@regression should reject expired coupon", async ({ page }) => {
+  test("@regression should reject expired coupon", async () => {
     logger.testStart("should reject invalid coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
@@ -85,7 +85,7 @@ test.describe("Shopping Cart", () => {
     await cartPage.verifyCouponApplied();
     logger.testPass("should apply valid coupon");
   });
-  test("@regression should show correct total with coupon", async ({ page }) => {
+  test("@regression should show correct total with coupon", async () => {
     logger.testStart("verify correct total with coupon");
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();

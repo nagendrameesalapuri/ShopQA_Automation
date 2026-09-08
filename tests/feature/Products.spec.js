@@ -38,7 +38,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should verify grid and list views");
   });
 
-  test("@regression should filter products by category", async ({ page }) => {
+  test("@regression should filter products by category", async () => {
     logger.testStart("should filter products by category");
     await productsPage.selectCategory("books");
     await productsPage.verifyCategorySelected("books");
@@ -54,7 +54,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should sort products by price ascending");
   });
 
-  test("@smoke should search for products", async ({ page }) => {
+  test("@smoke should search for products", async () => {
     logger.testStart("should search for products");
     await productsPage.searchProduct("iPhone");
     await productsPage.verifySearchURL("iPhone");
@@ -62,7 +62,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should search for products");
   });
 
-  test("@regression should show no results for invalid search", async ({ page }) => {
+  test("@regression should show no results for invalid search", async () => {
     logger.testStart("should show no results for invalid search");
     await productsPage.searchProduct("nagendra1234");
     await productsPage.verifySearchURL("nagendra1234");
@@ -70,7 +70,7 @@ test.describe("Product Catalog", () => {
     logger.testPass("should show no results for invalid search");
   });
 
-  test("@regression should paginate products", async ({ page }) => {
+  test("@regression should paginate products", async () => {
     logger.testStart("should paginate products");
     await productsPage.sortProductsByValue(APP_TEXT.A_TO_Z);
     const beforeFirst = await productsPage.getFirstProductName();
@@ -80,19 +80,19 @@ test.describe("Product Catalog", () => {
     logger.testPass("should paginate products");
   });
 
-  test("@regression should enable infinite scroll", async ({ page }) => {
+  test("@regression should enable infinite scroll", async () => {
     logger.testStart("should enable infinite scroll");
     await productsPage.verifyInfiniteScroll();
     logger.testPass("should enable infinite scroll");
   });
 
-  test("@regression should show out-of-stock badge", async ({ page }) => {
+  test("@regression should show out-of-stock badge", async () => {
     logger.testStart("should show out-of-stock badge");
     await productsPage.verifyOutOfStockBadge();
     logger.testPass("should show out-of-stock badge");
   });
 
-  test("@regression should display full product details", async ({ page }) => {
+  test("@regression should display full product details", async () => {
     logger.testStart("should display full product details");
     await productsPage.verifyProductDetails();
     logger.testPass("should display full product details");
