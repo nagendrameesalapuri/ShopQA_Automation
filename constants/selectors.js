@@ -108,6 +108,32 @@ const SELECTORS = {
   ORDER_STATUS_BADGE: '[data-testid="order-status-badge"]',
   ORDERS_EMPTY_STATE: 'h3:has-text("No orders yet")',
 
+  // ADMIN
+  ADMIN_STATS_GRID: '[data-testid="stats-grid"]',
+  ADMIN_TOTAL_REVENUE: '[data-testid="stat-total-revenue"]',
+  ADMIN_TOTAL_ORDERS: '[data-testid="stat-total-orders"]',
+  ADMIN_TOTAL_USERS: '[data-testid="stat-total-users"]',
+  ADMIN_SIDEBAR_PRODUCTS: '[data-testid="sidebar-products"]',
+  ADMIN_ORDERS_TABLE: '[data-testid="orders-table"]',
+  ADMIN_ACCESS_DENIED: "text=Access Denied",
+  ADMIN_ADD_PRODUCT_BUTTON: '[data-testid="btn-add-product"]',
+  ADMIN_PRODUCT_FORM_MODAL: '[data-testid="product-form-modal"]',
+  ADMIN_SAVE_PRODUCT_BUTTON: '[data-testid="btn-save-product"]',
+  ADMIN_PRODUCT_NAME_ERROR: '[data-testid="product-name-error"]',
+  ADMIN_IMAGE_DROPZONE: '[data-testid="image-dropzone"]',
+  ADMIN_CREATE_COUPON_BUTTON: '[data-testid="btn-create-coupon"]',
+  ADMIN_COUPON_CODE: '[data-testid="coupon-code"]',
+  ADMIN_COUPON_TYPE: '[data-testid="coupon-type"]',
+  ADMIN_COUPON_VALUE: '[data-testid="coupon-value"]',
+  ADMIN_COUPON_LIMIT: '[data-testid="coupon-limit"]',
+  ADMIN_SAVE_COUPON_BUTTON: '[data-testid="btn-save-coupon"]',
+  ADMIN_ERROR_TOAST: ".Toastify__toast--error",
+
+  // INTERACTIVE AND ACCESSIBILITY
+  HOME_SEARCH_REGION: '[data-testid="navbar"] [role="search"]',
+  SEARCH_ACCESSIBLE_INPUT: '[data-testid="navbar"] [aria-label="Search products"]',
+  ADMIN_CLOSE_MODAL_BUTTON: 'button[aria-label="Close modal"]',
+
   //DASHBOARD
   SEARCH_INPUT: "[data-testid='nav-search-input']",
   SEARCH_BUTTON: "[data-testid='nav-search-btn']",
