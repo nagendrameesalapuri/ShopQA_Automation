@@ -64,6 +64,7 @@ const SELECTORS = {
   CART_COUNT: '[data-testid="cart-count"]',
   ALERT: "alert",
   TOAST: ".Toastify__toast",
+  CART_TOAST: "#cart-add",
   CART_QUANTITY: "[data-testid='cart-qty']",
   CART_QUANTITY_INCREASE: "[data-testid='qty-increase']",
   CART_QUANTITY_DECREASE: "[data-testid='qty-decrease']",
@@ -75,6 +76,7 @@ const SELECTORS = {
   COUPON_ERROR: '[data-testid="coupon-error"]',
   CART_SUBTOTAL: '[data-testid="cart-subtotal"]',
   CART_TOTAL: '[data-testid="cart-total"]',
+  PROCEED_CHECKOUT_BUTTON: '[data-testid="proceed-checkout-btn"]',
 
   //CHECK OUT
   CHECK_OUT_STEP: "[data-testid='step-indicator'] [data-testid^='step-']",
@@ -85,6 +87,20 @@ const SELECTORS = {
   CHECK_OUT_CITY: '[data-testid="field-city"]',
   CHECK_OUT_STATE: '[data-testid="field-state"]',
   CHECK_OUT_POSTAL_CODE: '[data-testid="field-postal"]',
+  CHECK_OUT_DELIVERY_STEP: '[data-testid="step-delivery"]',
+  CHECK_OUT_DELIVERY_OPTION: (deliveryType) => `[data-testid="delivery-${deliveryType}"]`,
+  CHECK_OUT_PAYMENT_STEP: '[data-testid="step-payment"]',
+  CHECK_OUT_PAYMENT_CREDIT_CARD: '[data-testid="payment-credit-card"]',
+  CHECK_OUT_CARD_NUMBER: '[data-testid="card-number"]',
+  CHECK_OUT_CARD_EXPIRY: '[data-testid="card-expiry"]',
+  CHECK_OUT_CARD_CVV: '[data-testid="card-cvv"]',
+  CHECK_OUT_CARD_NAME: '[data-testid="card-name"]',
+  CHECK_OUT_REVIEW_STEP: '[data-testid="step-review"]',
+  CHECK_OUT_PLACE_ORDER: '[data-testid="btn-place-order"]',
+  CHECK_OUT_DATE_PICKER_TRIGGER: '[data-testid="date-picker-trigger"]',
+  CHECK_OUT_DATE_PICKER_CALENDAR: '[data-testid="datepicker-calendar"]',
+  CHECK_OUT_DATE_PICKER_NEXT_MONTH: '[data-testid="dp-next-month"]',
+  CHECK_OUT_DATE_PICKER_DAY: '[data-testid^="dp-day-"]',
 
   //DASHBOARD
   SEARCH_INPUT: "[data-testid='nav-search-input']",

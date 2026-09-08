@@ -80,17 +80,41 @@ class LoginPage extends BasePage {
     await this.expectContainsText(this.loginError, APP_TEXT.INVALID_LOGIN_ERROR);
   }
 
-  async loginAs(role = "customer") {
-    const credentials = loginData[role];
-    if (!credentials) {
-      throw new Error(`Invalid login role: ${role}`);
+  async loginAs(identifier = "customer", password = null) {
+    let credentials;
+
+    if (password !== null) {
+      credentials = {
+        email: identifier,
+        password,
+      };
+    } else if (typeof identifier === "string" && loginData[identifier]) {
+      credentials = loginData[identifier];
+    } else {
+      const directMatch = Object.values(loginData).find(
+        (entry) => entry.email === identifier || entry.email === String(identifier),
+      );
+      if (!directMatch) {
+        throw new Error(`Invalid login role: ${identifier}`);
+      }
+      credentials = directMatch;
     }
-    logger.info(`Attempting to login as: ${role}`);
+
+    const loginLabel = credentials.email === loginData.customer.email ? "customer" : "admin";
+    logger.info(`Attempting to login as: ${loginLabel}`);
     await this.enterEmail(credentials.email);
     await this.enterPassword(credentials.password);
     await this.clickLogin();
-    await this.expectContainsText(this.successToast, APP_TEXT.WELCOME_MESSAGE);
-    logger.info(`Successfully logged in as: ${role}`);
+
+    if (loginLabel === "customer") {
+      await this.waitForElement(this.userMenu, TIMEOUTS.LONG);
+      await this.expectVisible(this.userMenu);
+    } else {
+      await this.waitForElement(this.adminMenu, TIMEOUTS.EXTRA_LONG);
+      await this.expectVisible(this.adminMenu);
+    }
+
+    logger.info(`Successfully logged in as: ${loginLabel}`);
   }
 
   async verifyCustomerLoggedIn() {

@@ -15,6 +15,7 @@ test.describe("Checkout", () => {
   });
 
   test("should search product", async ({ page }) => {
+    logger.testStart("should search product");
     const productName = "iPhone";
     logger.info(`Starting product search for: ${productName}`);
     await dashboardPage.searchProduct(productName);
@@ -22,5 +23,6 @@ test.describe("Checkout", () => {
     logger.info(`Search URL verified: search=${productName}`);
     await dashboardPage.verifySearchResult(productName);
     logger.info(`Search results verified for: ${productName}`);
+    logger.testPass("should search product");
   });
 });
