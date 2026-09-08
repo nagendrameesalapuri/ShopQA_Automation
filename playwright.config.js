@@ -33,7 +33,7 @@ module.exports = defineConfig({
   use: {
     baseURL: getBaseURL(),
 
-    headless: process.env.HEADLESS ? process.env.HEADLESS === "false" : true,
+    headless: process.env.HEADLESS !== "false",
 
     screenshot: "only-on-failure",
 
@@ -52,18 +52,18 @@ module.exports = defineConfig({
         ...devices["Desktop Chrome"],
       },
     },
-    // {
-    //   name: "firefox",
-    //   use: {
-    //     ...devices["Desktop Firefox"],
-    //   },
-    // },
-    // {
-    //   name: "webkit",
-    //   use: {
-    //     ...devices["Desktop Safari"],
-    //   },
-    // },
+    {
+      name: "firefox",
+      use: {
+        ...devices["Desktop Firefox"],
+      },
+    },
+    {
+      name: "webkit",
+      use: {
+        ...devices["Desktop Safari"],
+      },
+    },
   ],
 
   // No local web server is required for this project because the app is already hosted.
