@@ -1,6 +1,6 @@
 # ShopQA Automation
 
-A robust Playwright-based test automation framework for the ShopQA e-commerce platform with comprehensive login and authentication testing.
+A Playwright-based QA automation framework for the ShopQA e-commerce platform, organized around reusable page objects, tagged test tiers, feature coverage, regression checks, and end-to-end business journeys.
 
 ## 📋 Prerequisites
 
@@ -32,6 +32,21 @@ cp .env.example .env
 # Run all tests
 npm test
 
+# Run critical smoke tests
+npm run test:smoke
+
+# Run release-candidate sanity tests
+npm run test:sanity
+
+# Run regression and edge-case tests
+npm run test:regression
+
+# Run cross-page E2E journeys
+npm run test:e2e
+
+# Run admin panel tests only
+npm run test:admin
+
 # Run with headed browser
 npm run test:headed
 
@@ -59,7 +74,9 @@ ShopQA_Automation/
 │   ├── RegistrationPage.js # Registration page object
 │   └── POManager.js      # Page object manager
 ├── tests/                # Test specifications
-│   └── Login.spec.js     # Login tests
+│   ├── feature/          # Feature-level functional tests
+│   ├── regression/       # Dedicated regression and edge-case tests
+│   └── e2e/              # Cross-page business journeys
 ├── testData/             # Test data and configurations
 │   ├── loginData.js      # Login credentials
 │   └── env.config.js     # Environment configuration
@@ -86,13 +103,14 @@ For detailed guidance on using the framework:
 - **[Assertion Strategy Guide](./docs/ASSERTION_STRATEGY.md)** - When and how to use BasePage vs CustomAssertions
 - **[Consolidation Summary](./docs/CONSOLIDATION_SUMMARY.md)** - Overview of assertion refactoring
 - **[Timeout Usage Analysis](./docs/TIMEOUTS_USAGE_ANALYSIS.md)** - Centralized timeout guidance
+- **[E2E Test Strategy](./docs/E2E_TEST_STRATEGY.md)** - Test folders, tags, and journey coverage
 
 ## 🏗️ Architecture
 
 ### Page Object Model (POM)
 
 - **BasePage**: Abstract base class with common utilities
-- **LoginPage**: Login page-specific methods extending BasePage
+- **Domain page objects**: Login, Products, Cart, Checkout, Orders, Admin, and Accessibility flows
 - **POManager**: Centralized page object instantiation
 
 ### Test Data Management
@@ -111,9 +129,14 @@ For detailed guidance on using the framework:
 Tests are tagged with metadata for better organization:
 
 - `@smoke`: Critical path tests (quick validation)
-- `@regression`: Full regression test suite
+- `@sanity`: Focused happy-path checks for release candidates
+- `@regression`: Negative, edge-case, and broader feature coverage
+- `@e2e`: Cross-page business journeys under `tests/e2e/`
+- `@admin`: Admin panel feature and admin E2E coverage
 - `@login`: Login-related tests
 - `@registration`: Registration-related tests
+
+Smoke and sanity are tags rather than duplicate folders. This allows a feature test to belong to both tiers when appropriate.
 
 ## 📊 Reporting
 
@@ -156,8 +179,8 @@ npm run format
 
 ### Add New Tests
 
-1. Create test file in `tests/` folder
-2. Import POManager: `const { POManager } = require("../pageObjects/POManager");`
+1. Place feature tests in `tests/feature/`, regression-only tests in `tests/regression/`, or cross-page journeys in `tests/e2e/`
+2. Import POManager from a feature or regression test: `const { POManager } = require("../../pageObjects/POManager");`
 3. Use page objects for interactions
 4. Add test tags: `test("@smoke @login description", ...)`
 
@@ -190,8 +213,8 @@ test("@smoke @login should login successfully", async ({ page }) => {
 # Run with headed browser (see what's happening)
 npm run test:headed
 
-# Debug specific test file
-npx playwright test tests/Login.spec.js --debug
+# Debug a specific feature test file
+npx playwright test tests/feature/Login.spec.js --debug
 ```
 
 ### View Traces
