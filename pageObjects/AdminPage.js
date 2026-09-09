@@ -46,10 +46,12 @@ class AdminPage extends BasePage {
 
   async verifyDashboardStatsVisible() {
     logger.info("Verifying admin dashboard statistics");
-    await expect(this.statsGrid).toBeVisible();
-    await expect(this.totalRevenue).toBeVisible();
-    await expect(this.totalOrders).toBeVisible();
-    await expect(this.totalUsers).toBeVisible();
+    await this.expectAllVisible([
+      this.statsGrid,
+      this.totalRevenue,
+      this.totalOrders,
+      this.totalUsers,
+    ]);
   }
 
   async navigateToProductsFromSidebar() {
@@ -59,18 +61,18 @@ class AdminPage extends BasePage {
 
   async verifyOrdersTableVisible() {
     logger.info("Verifying admin orders table is visible");
-    await expect(this.ordersTable).toBeVisible();
+    await this.expectVisible(this.ordersTable);
   }
 
   async verifyAccessDenied() {
     logger.info("Verifying admin access is denied");
-    await expect(this.accessDenied).toBeVisible();
+    await this.expectVisible(this.accessDenied);
   }
 
   async openAddProductModal() {
     logger.info("Opening add product modal");
     await this.click(this.addProductButton);
-    await expect(this.productFormModal).toBeVisible();
+    await this.expectVisible(this.productFormModal);
   }
 
   async saveProduct() {
@@ -80,17 +82,17 @@ class AdminPage extends BasePage {
 
   async verifyProductNameValidation() {
     logger.info("Verifying product name validation");
-    await expect(this.productNameError).toBeVisible();
+    await this.expectVisible(this.productNameError);
   }
 
   async verifyImageDropzoneVisible() {
     logger.info("Verifying product image dropzone is visible");
-    await expect(this.imageDropzone).toBeVisible();
+    await this.expectVisible(this.imageDropzone);
   }
 
   async verifyDropzoneDragOver() {
     logger.info("Verifying image dropzone drag-over state");
-    await expect(this.imageDropzone).toBeVisible();
+    await this.expectVisible(this.imageDropzone);
     await this.imageDropzone.evaluate((element) => {
       const dataTransfer = new DataTransfer();
       dataTransfer.items.add(new File(["test"], "test.png", { type: "image/png" }));
@@ -121,12 +123,12 @@ class AdminPage extends BasePage {
 
   async verifyCouponVisible(code) {
     logger.info(`Verifying coupon is visible: ${code}`);
-    await expect(this.page.getByText(code, { exact: true })).toBeVisible();
+    await this.expectVisible(this.page.getByText(code, { exact: true }));
   }
 
   async verifyDuplicateCouponError() {
     logger.info("Verifying duplicate coupon error");
-    await expect(this.errorToast).toBeVisible();
+    await this.expectVisible(this.errorToast);
   }
 }
 

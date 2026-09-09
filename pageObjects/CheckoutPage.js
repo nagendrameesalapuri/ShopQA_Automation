@@ -71,7 +71,7 @@ class CheckoutPage extends BasePage {
   }
 
   async verifyCheckoutStep(stepLocator) {
-    await expect(stepLocator).toBeVisible();
+    await this.expectVisible(stepLocator);
   }
 
   async placeOrder() {
@@ -81,7 +81,7 @@ class CheckoutPage extends BasePage {
 
   async verifyPaymentFailure() {
     logger.info("Verifying payment failure");
-    await expect(this.paymentErrorToast).toContainText(/payment/i);
+    await this.expectContainsText(this.paymentErrorToast, /payment/i);
   }
 
   async openDatePicker() {
@@ -114,13 +114,13 @@ class CheckoutPage extends BasePage {
 
   async verifyRequiredFieldsValidation() {
     logger.info("Verifying required shipping fields validation");
-    await expect(this.toastNotification).toContainText(/required|fill/i);
+    await this.expectContainsText(this.toastNotification, /required|fill/i);
   }
 
   async verifyPostalCodeValidation() {
     logger.info("Verifying postal code validation");
-    await expect(this.page).toHaveURL(/checkout/i);
-    await expect(this.postalCode).toBeVisible();
+    await this.expectURLContains(/checkout/i);
+    await this.expectVisible(this.postalCode);
   }
 
   async enterShippingDetails({ fullName, phone, line1, city, state, postal }) {
