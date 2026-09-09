@@ -24,8 +24,8 @@ class AccessibilityPage extends BasePage {
 
   async verifyNavigationAccessibility() {
     logger.info("Verifying navigation accessibility labels");
-    await expect(this.searchRegion).toBeVisible();
-    await expect(this.searchInput).toBeVisible();
+    await this.expectVisible(this.searchRegion);
+    await this.expectVisible(this.searchInput);
   }
 
   async verifyKeyboardNavigation() {

@@ -20,7 +20,7 @@ class OrdersPage extends BasePage {
 
   async verifyOrdersPageVisible() {
     logger.info("Verifying orders page is visible");
-    await expect(this.ordersPage).toBeVisible();
+    await this.expectVisible(this.ordersPage);
   }
 
   async filterOrdersByStatus(status) {
@@ -34,15 +34,13 @@ class OrdersPage extends BasePage {
     const orderCount = await this.orderStatusBadges.count();
 
     if (orderCount === 0) {
-      await expect(this.emptyState).toBeVisible();
+      await this.expectVisible(this.emptyState);
       logger.info(`No orders found for status: ${expectedStatus}`);
       return;
     }
 
-    await expect(this.orderStatusBadges.first()).toBeVisible();
-
+    await this.expectVisible(this.orderStatusBadges.first());
     const statuses = await this.orderStatusBadges.allTextContents();
-
     for (const status of statuses) {
       expect(status.trim().toLowerCase()).toContain(expectedStatus.toLowerCase());
     }
