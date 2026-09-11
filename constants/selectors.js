@@ -78,6 +78,19 @@ const SELECTORS = {
   CART_TOTAL: "[data-testid=\"cart-total\"]",
   PROCEED_CHECKOUT_BUTTON: "[data-testid=\"proceed-checkout-btn\"]",
 
+  //WISHLIST
+  NAV_WISHLIST: "[data-testid=\"nav-wishlist\"]",
+  MENU_WISHLIST: "[data-testid=\"menu-wishlist\"]",
+  WISHLIST_TOGGLE_BUTTON: "[data-testid=\"wishlist-btn\"]",
+  WISHLIST_PAGE: "[data-testid=\"wishlist-page\"]",
+  WISHLIST_HEADING: "[data-testid=\"wishlist-page\"] h1",
+  EMPTY_WISHLIST: "[data-testid=\"empty-wishlist\"]",
+  WISHLIST_ITEM: "[data-testid=\"wishlist-item\"]",
+  WISHLIST_ITEM_NAME: "[data-testid=\"wishlist-item-name\"]",
+  WISHLIST_ITEM_PRICE: "[data-testid=\"wishlist-item-price\"]",
+  REMOVE_WISHLIST_ITEM: "[data-testid=\"remove-wishlist-item\"]",
+  WISHLIST_ADD_TO_CART: "[data-testid=\"wishlist-add-to-cart\"]",
+
   //CHECK OUT
   CHECK_OUT_STEP: "[data-testid='step-indicator'] [data-testid^='step-']",
   CHECK_OUT_NEXT_STEP: "[data-testid=\"btn-next\"]",

@@ -2,6 +2,7 @@ const { LoginPage } = require("../pageObjects/LoginPage");
 const { RegistrationPage } = require("../pageObjects/RegistrationPage");
 const { ProductsPage } = require("../pageObjects/ProductsPage");
 const { CartPage } = require("./CartPage");
+const { WishlistPage } = require("./WishlistPage");
 const { CheckoutPage } = require("./CheckoutPage");
 const { DashboardPage } = require("./DashboardPage");
 const { OrdersPage } = require("./OrdersPage");
@@ -15,6 +16,7 @@ class POManager {
     this.registrationPage = new RegistrationPage(page);
     this.productsPage = new ProductsPage(page);
     this.cartPage = new CartPage(page);
+    this.wishlistPage = new WishlistPage(page);
     this.checkoutPage = new CheckoutPage(page);
     this.dashboardPage = new DashboardPage(page);
     this.ordersPage = new OrdersPage(page);
@@ -36,6 +38,10 @@ class POManager {
 
   getCartPage() {
     return this.cartPage;
+  }
+
+  getWishlistPage() {
+    return this.wishlistPage;
   }
 
   getCheckoutPage() {
