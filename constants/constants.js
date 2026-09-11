@@ -30,6 +30,9 @@ const APP_TEXT = {
   OUT_OF_STOCK: "Out of Stock",
   WELCOME_MESSAGE: "Welcome back",
   ADDED_TO_CART_MESSAGE: "Added to cart",
+  ADDED_TO_WISHLIST_MESSAGE: "Added to wishlist",
+  REMOVED_FROM_WISHLIST_MESSAGE: "Removed from wishlist",
+  EMPTY_WISHLIST_MESSAGE: "Your wishlist is empty",
 };
 
 const TEST_VALUES = {

@@ -185,6 +185,11 @@ class ProductsPage extends BasePage {
     await expect(oosBadge).toContainText(APP_TEXT.OUT_OF_STOCK);
   }
 
+  async openFirstProduct() {
+    logger.info("Opening first product from listing");
+    await this.click(this.productCards.first());
+  }
+
   async verifyProductDetails() {
     logger.info("Opening product details and verifying detail fields");
     await this.click(this.productCards.first());
