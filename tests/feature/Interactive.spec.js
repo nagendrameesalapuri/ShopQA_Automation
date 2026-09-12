@@ -46,6 +46,7 @@ test.describe("Checkout Date Picker", () => {
     checkoutPage = poManager.getCheckoutPage();
     await loginPage.navigate();
     await loginPage.loginAs("customer");
+    await cartPage.clearCart();
     await dashboardPage.searchProduct("iPhone");
     await cartPage.addFirstProductToCart();
     await cartPage.clickProceedToCheckout();

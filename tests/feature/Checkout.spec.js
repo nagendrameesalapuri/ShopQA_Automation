@@ -12,6 +12,7 @@ test.describe("Checkout", () => {
   async function openCheckoutForProduct(productName = "iPhone") {
     await test.step(`Open checkout flow for product: ${productName}`, async () => {
       logger.info(`Starting product search for: ${productName}`);
+      await cartPage.clearCart();
       await dashboardPage.searchProduct(productName);
       await cartPage.addFirstProductToCart();
       await cartPage.clickProceedToCheckout();
@@ -140,6 +141,7 @@ test.describe("@regression Regression: Checkout delivery options", () => {
       logger.testStart(testName);
       await loginPage.navigate();
       await loginPage.loginAs("customer");
+      await cartPage.clearCart();
       await dashboardPage.searchProduct("iPhone");
       await cartPage.addFirstProductToCart();
       await cartPage.clickProceedToCheckout();

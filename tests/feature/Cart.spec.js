@@ -35,14 +35,15 @@ test.describe("Shopping Cart", () => {
 
   test("@regression should update quantity in cart", async () => {
     logger.testStart("should update quantity in cart");
+    const productName = await productsPage.getFirstProductName();
     await cartPage.addFirstProductToCart();
     await cartPage.navigateToCartPage();
-    let qtyBefore = await cartPage.getCartQuantity();
-    await cartPage.increaseQuantity();
-    await cartPage.verifyCartQuantity(qtyBefore + 1);
-    qtyBefore = await cartPage.getCartQuantity();
-    await cartPage.decreaseQuantity();
-    await cartPage.verifyCartQuantity(qtyBefore - 1);
+    let qtyBefore = await cartPage.getCartQuantity(productName);
+    await cartPage.increaseQuantity(productName);
+    await cartPage.verifyCartQuantity(qtyBefore + 1, productName);
+    qtyBefore = await cartPage.getCartQuantity(productName);
+    await cartPage.decreaseQuantity(productName);
+    await cartPage.verifyCartQuantity(qtyBefore - 1, productName);
     logger.testPass("should update quantity in cart");
   });
 
