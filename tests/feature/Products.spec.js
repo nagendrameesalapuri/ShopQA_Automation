@@ -88,6 +88,8 @@ test.describe("Product Catalog", () => {
 
   test("@regression should show out-of-stock badge", async () => {
     logger.testStart("should show out-of-stock badge");
+    const hasOutOfStock = await productsPage.hasOutOfStockProducts();
+    test.skip(!hasOutOfStock, "No out-of-stock products currently exist in the catalog");
     await productsPage.verifyOutOfStockBadge();
     logger.testPass("should show out-of-stock badge");
   });

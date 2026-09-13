@@ -3,6 +3,7 @@ const { BasePage } = require("./BasePage");
 const logger = require("../utils/logger");
 const { APP_TEXT } = require("../constants/constants");
 const { ROUTES } = require("../constants/routes");
+const { TIMEOUTS } = require("../constants/timeouts");
 const { expect } = require("@playwright/test");
 
 class CartPage extends BasePage {
@@ -24,6 +25,11 @@ class CartPage extends BasePage {
     this.cartSubtotal = page.locator(SELECTORS.CART_SUBTOTAL);
     this.cartTotal = page.locator(SELECTORS.CART_TOTAL);
     this.checkoutButton = page.locator(SELECTORS.PROCEED_CHECKOUT_BUTTON);
+    this.cartItems = page.locator(SELECTORS.CART_ITEM);
+  }
+
+  getCartItemRow(productName) {
+    return this.cartItems.filter({ hasText: productName });
   }
 
   async navigateToCartPage() {
@@ -55,28 +61,42 @@ class CartPage extends BasePage {
     await this.expectContainsText(this.toast, APP_TEXT.ADDED_TO_CART_MESSAGE);
   }
 
-  async getCartQuantity() {
+  async getCartQuantity(productName = null) {
     logger.info("Getting current cart quantity");
-    const quantity = parseInt((await this.cartQty.first().textContent()) || "0", 10);
+    const qtyLocator = productName
+      ? this.getCartItemRow(productName).locator(SELECTORS.CART_QUANTITY)
+      : this.cartQty.first();
+    const quantity = parseInt((await qtyLocator.textContent()) || "0", 10);
     logger.info(`Current cart quantity: ${quantity}`);
     return quantity;
   }
 
-  async increaseQuantity() {
+  async increaseQuantity(productName = null) {
     logger.info("Increasing product quantity");
-    await this.click(this.cartQtyIncrease.first());
+    const button = productName
+      ? this.getCartItemRow(productName).locator(SELECTORS.CART_QUANTITY_INCREASE)
+      : this.cartQtyIncrease.first();
+    await this.click(button);
+    await this.page.waitForLoadState(APP_TEXT.NETWORKIDLE);
     logger.info("Product quantity increase clicked");
   }
 
-  async decreaseQuantity() {
+  async decreaseQuantity(productName = null) {
     logger.info("Decreasing product quantity");
-    await this.click(this.cartQtyDecrease.first());
+    const button = productName
+      ? this.getCartItemRow(productName).locator(SELECTORS.CART_QUANTITY_DECREASE)
+      : this.cartQtyDecrease.first();
+    await this.click(button);
+    await this.page.waitForLoadState(APP_TEXT.NETWORKIDLE);
     logger.info("Product quantity decrease clicked");
   }
 
-  async verifyCartQuantity(expectedQuantity) {
+  async verifyCartQuantity(expectedQuantity, productName = null) {
     logger.info(`Verifying cart quantity is ${expectedQuantity}`);
-    await this.expectHasText(this.cartQty.first(), String(expectedQuantity));
+    const qtyLocator = productName
+      ? this.getCartItemRow(productName).locator(SELECTORS.CART_QUANTITY)
+      : this.cartQty.first();
+    await this.expectHasText(qtyLocator, String(expectedQuantity));
     logger.info(`Cart quantity verified successfully: ${expectedQuantity}`);
   }
 
@@ -167,6 +187,23 @@ class CartPage extends BasePage {
     logger.info("Getting discount amount");
     const text = await this.discountAmount.textContent();
     return parseFloat(text.replace(/[^0-9.]/g, ""));
+  }
+
+  async clearCart() {
+    logger.info("Clearing all items from cart");
+    await this.navigateToCartPage();
+    await this.page.waitForLoadState(APP_TEXT.NETWORKIDLE);
+    let count = await this.removeItemButton.count();
+    while (count > 0) {
+      try {
+        await this.removeItemButton.first().click({ timeout: TIMEOUTS.SHORT });
+      } catch {
+        logger.info("Remove click raced with a cart re-render, re-checking cart state");
+      }
+      await this.page.waitForLoadState(APP_TEXT.NETWORKIDLE);
+      count = await this.removeItemButton.count();
+    }
+    logger.info("Cart cleared");
   }
 
   async clickProceedToCheckout() {

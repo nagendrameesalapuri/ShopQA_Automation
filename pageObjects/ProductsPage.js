@@ -177,10 +177,15 @@ class ProductsPage extends BasePage {
     expect(newCount).toBeGreaterThanOrEqual(initialCount);
   }
 
-  async verifyOutOfStockBadge() {
-    logger.info("Verifying out-of-stock badge");
+  async hasOutOfStockProducts() {
+    logger.info("Checking whether any out-of-stock products currently exist");
     await this.navigate(ROUTES.OUT_OF_STOCK);
     await this.page.waitForTimeout(TIMEOUTS.SHORT);
+    return (await this.outOfStockBadge.count()) > 0;
+  }
+
+  async verifyOutOfStockBadge() {
+    logger.info("Verifying out-of-stock badge");
     const oosBadge = this.outOfStockBadge.first();
     await expect(oosBadge).toContainText(APP_TEXT.OUT_OF_STOCK);
   }

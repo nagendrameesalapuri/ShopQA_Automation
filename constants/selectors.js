@@ -17,6 +17,7 @@ const SELECTORS = {
 
   // User Menu & Dashboard
   USER_MENU: "[data-testid='user-menu-btn']",
+  MENU_LOGOUT: "[data-testid='menu-logout']",
   ADMIN_DASHBOARD: "[data-testid='admin-dashboard']",
   SESSION_EXPIRED_MSG: "[data-testid='session-expired-msg']",
 
@@ -31,6 +32,7 @@ const SELECTORS = {
   REGISTRATION_PHONE_INPUT: "[data-testid='input-reg-phone']",
   CREATE_ACCOUNT_BUTTON: `button:has-text('${APP_TEXT.CREATE_ACCOUNT_BUTTON}')`,
   SIGN_IN_LINK: "a:has-text('Sign in')",
+  NAV_LOGIN: "[data-testid='nav-login']",
   PASSWORD_STRENGTH: "[data-testid='password-strength']",
   CONFIRM_PASSWORD_ERROR: "[data-testid='confirm-password-error']",
   REGISTRATION_SUCCESS_MESSAGE: `text=${APP_TEXT.REGISTRATION_SUCCESS_MESSAGE}`,
@@ -61,6 +63,7 @@ const SELECTORS = {
   //CART
   ADD_TO_CART_BUTTON: "[data-testid=\"add-to-cart-btn\"]",
   CART_COUNT: "[data-testid=\"cart-count\"]",
+  CART_ITEM: "[data-testid=\"cart-item\"]",
   ALERT: "alert",
   TOAST: ".Toastify__toast",
   CART_TOAST: "#cart-add",

@@ -41,6 +41,7 @@ test.describe("@admin Admin Panel", () => {
   test("@regression should deny access to non-admin user", async () => {
     const testName = "should deny access to non-admin user";
     logger.testStart(testName);
+    await loginPage.logout();
     await loginPage.navigate();
     await loginPage.loginAs("customer");
     await adminPage.navigateToAdminDashboard();

@@ -19,6 +19,8 @@ class LoginPage extends BasePage {
     this.passwordError = page.locator(SELECTORS.PASSWORD_ERROR);
     this.loginError = page.locator(SELECTORS.LOGIN_ERROR);
     this.userMenu = page.locator(SELECTORS.USER_MENU);
+    this.menuLogout = page.locator(SELECTORS.MENU_LOGOUT);
+    this.navLoginLink = page.locator(SELECTORS.NAV_LOGIN);
     this.adminMenu = page.locator(SELECTORS.ADMIN_DASHBOARD);
     this.sessionExpiredMsg = page.locator(SELECTORS.SESSION_EXPIRED_MSG);
     this.forgotPasswordLink = page.locator(SELECTORS.FORGOT_PASSWORD_LINK);
@@ -115,6 +117,16 @@ class LoginPage extends BasePage {
     }
 
     logger.info(`Successfully logged in as: ${loginLabel}`);
+  }
+
+  async logout() {
+    logger.info("Logging out current user");
+    await this.page.goto(ROUTES.HOME);
+    await this.waitForElement(this.userMenu, TIMEOUTS.LONG);
+    await this.click(this.userMenu);
+    await this.click(this.menuLogout);
+    await this.waitForElement(this.navLoginLink, TIMEOUTS.LONG);
+    logger.info("Successfully logged out");
   }
 
   async verifyCustomerLoggedIn() {
